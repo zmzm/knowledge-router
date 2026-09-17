@@ -41,6 +41,31 @@ Additional options:
 
 Human-readable search output shows paths, sections, line ranges, scores, and reasons. JSON includes the retrieved content as well. `knowledge --help` lists all options.
 
+## Instructions for AI agents
+
+[AGENT-USAGE.md](./AGENT-USAGE.md) is a ready-to-use agent guide covering search, routing,
+reading sections, uncertain results, and index freshness.
+
+After building the CLI, add the following to the target project's agent instructions
+(for example, `AGENTS.md`), replacing the paths with your installation's absolute paths:
+
+```markdown
+Before implementation, bug fixes, refactoring, or design work covered by the coding vault,
+read and follow `/absolute/path/to/knowledge-router/AGENT-USAGE.md`.
+
+Knowledge Router configuration:
+
+- KNOWLEDGE_ROUTER_CLI: /absolute/path/to/knowledge-router/dist/cli.js
+- KNOWLEDGE_VAULT: /absolute/path/to/obsidian-vaults/coding
+
+Use these values as environment variables or substitute them into the guide's commands.
+Retrieve focused context with `search --json`, read the returned skill and reference content,
+and apply it alongside this project's instructions.
+```
+
+The guide can also be copied into an agent's instruction context when it cannot read the
+installation directory. It is included in the npm package alongside this README.
+
 ## Library
 
 ```ts
