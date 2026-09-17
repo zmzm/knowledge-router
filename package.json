@@ -1,0 +1,49 @@
+{
+  "name": "knowledge-router",
+  "version": "1.0.0",
+  "description": "Deterministic, metadata-first retrieval for Markdown coding vaults",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "knowledge": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "verify": "npm run lint && npm run format:check && npm test",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "validate:vault": "npm run build && node scripts/validate-vault.mjs",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "picomatch": "^4.0.3",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.18.0",
+    "@types/picomatch": "^4.0.2",
+    "eslint": "^10.10.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.5.0",
+    "prettier": "^3.9.7",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.70.0"
+  }
+}
