@@ -1,0 +1,702 @@
+{
+  "schemaVersion": 1,
+  "name": "Flow Forge observed queries",
+  "labeling": "Agent-reviewed against the current coding vault; not yet user-reviewed. Empty routes denote product questions outside the coding vault.",
+  "cases": [
+    {
+      "id": "flowforge-01",
+      "tags": ["flowforge", "positive"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260918_074711_f9-d1.log",
+        "line": 12,
+        "command": "search"
+      },
+      "request": {
+        "query": "course content model with video reading assignment quiz and completion rules data model"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "database"
+          }
+        ],
+        "documents": ["backend/database/SKILL.md"]
+      },
+      "rationale": "Data-model design calls for database guidance; the vault has no course-specific schema."
+    },
+    {
+      "id": "flowforge-02",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260918_074711_f9-d1.log",
+        "line": 150,
+        "command": "search"
+      },
+      "request": {
+        "query": "course content model validation and completion rules constraints"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "Product completion rules and constraints are absent from this coding vault."
+    },
+    {
+      "id": "flowforge-03",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260918_084849_f9-d2.log",
+        "line": 11,
+        "command": "search"
+      },
+      "request": {
+        "query": "add quiz knowledge check with scoring integrated into course progress tracking"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "Quiz scoring and product progress policy are absent from the coding vault."
+    },
+    {
+      "id": "flowforge-04",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260918_084849_f9-d2.log",
+        "line": 15,
+        "command": "search"
+      },
+      "request": {
+        "query": "course progress completion model assignment versus quiz in mentory app"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "Application-specific course completion model is outside the coding vault."
+    },
+    {
+      "id": "flowforge-05",
+      "tags": ["flowforge", "positive"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260918_084849_f9-d2.log",
+        "line": 145,
+        "command": "search"
+      },
+      "request": {
+        "query": "invalidate React Query enrollment queries after quiz attempt mutation updates progress",
+        "paths": ["apps/frontend/src/features/courses/hooks/useProgressSync.hook.ts"]
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "react-query"
+          }
+        ],
+        "documents": [
+          "frontend/react-query/SKILL.md",
+          "frontend/react-query/references/cache-invalidation.md"
+        ]
+      },
+      "rationale": "Invalidate enrollment query caches after mutation success."
+    },
+    {
+      "id": "flowforge-06",
+      "tags": ["flowforge", "positive", "mixed"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260919_030011_f9-d3.log",
+        "line": 13,
+        "command": "search"
+      },
+      "request": {
+        "query": "mentor admin course authoring permissions draft state modules metadata"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "security"
+          },
+          {
+            "domain": "backend",
+            "skill": "coding"
+          }
+        ],
+        "documents": ["backend/security/SKILL.md", "backend/coding/SKILL.md"]
+      },
+      "rationale": "Author permissions and module structure are separate implementation concerns."
+    },
+    {
+      "id": "flowforge-07",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260919_030011_f9-d3.log",
+        "line": 33,
+        "command": "search"
+      },
+      "request": {
+        "query": "course authoring"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "Course authoring without an implementation concern has no corresponding coding skill."
+    },
+    {
+      "id": "flowforge-08",
+      "tags": ["flowforge", "positive"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260919_030011_f9-d3.log",
+        "line": 170,
+        "command": "search"
+      },
+      "request": {
+        "query": "role-based access control draft state content authoring constraints"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "security"
+          }
+        ],
+        "documents": ["backend/security/SKILL.md"]
+      },
+      "rationale": "Role-based authorization is backend security, not ARIA roles."
+    },
+    {
+      "id": "flowforge-09",
+      "tags": ["flowforge", "positive"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260919_030011_f9-d3.log",
+        "line": 302,
+        "command": "route"
+      },
+      "request": {
+        "query": "course authoring MVP objectives draft status transitions frontend feature conventions"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "coding"
+          }
+        ],
+        "documents": [
+          "frontend/coding/SKILL.md",
+          "frontend/coding/references/component-structure.md"
+        ]
+      },
+      "rationale": "The query explicitly requests frontend feature conventions."
+    },
+    {
+      "id": "flowforge-10",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260919_030011_f9-d3.log",
+        "line": 305,
+        "command": "search"
+      },
+      "request": {
+        "query": "course"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "A bare product entity name is insufficient routing evidence."
+    },
+    {
+      "id": "flowforge-11",
+      "tags": ["flowforge", "positive"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260919_030011_f9-d3.log",
+        "line": 305,
+        "command": "search"
+      },
+      "request": {
+        "query": "frontend component conventions"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "coding"
+          }
+        ],
+        "documents": [
+          "frontend/coding/SKILL.md",
+          "frontend/coding/references/component-structure.md"
+        ]
+      },
+      "rationale": "General frontend component conventions."
+    },
+    {
+      "id": "flowforge-12",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260920_030004_f9-d4.log",
+        "line": 8,
+        "command": "search"
+      },
+      "request": {
+        "query": "course publishing moderation workflow draft published archived admin approval safeguards domain rules"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "The vault cannot supply product publishing and moderation policy."
+    },
+    {
+      "id": "flowforge-13",
+      "tags": ["flowforge", "positive"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260920_030004_f9-d4.log",
+        "line": 135,
+        "command": "search"
+      },
+      "request": {
+        "query": "course moderation publishing workflow admin approval state machine constraints"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "common",
+            "skill": "engineering"
+          }
+        ],
+        "documents": [
+          "common/engineering/SKILL.md",
+          "common/engineering/references/state-and-recovery.md"
+        ]
+      },
+      "rationale": "State-machine invariants can use shared engineering guidance, not agent task workflow."
+    },
+    {
+      "id": "flowforge-14",
+      "tags": ["flowforge", "positive", "mixed"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260920_030004_f9-d4.log",
+        "line": 139,
+        "command": "search"
+      },
+      "request": {
+        "query": "backend NestJS state transitions enum validation guard conventions"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "coding"
+          },
+          {
+            "domain": "backend",
+            "skill": "security"
+          }
+        ],
+        "documents": ["backend/coding/SKILL.md", "backend/security/SKILL.md"]
+      },
+      "rationale": "NestJS enum validation and guards span structure and security."
+    },
+    {
+      "id": "flowforge-15",
+      "tags": ["flowforge", "positive", "mixed"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260921_030001_f10-d1.log",
+        "line": 9,
+        "command": "search"
+      },
+      "request": {
+        "query": "learning path domain ordered modules validation admin mentor permissions"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "coding"
+          },
+          {
+            "domain": "backend",
+            "skill": "security"
+          }
+        ],
+        "documents": ["backend/coding/SKILL.md", "backend/security/SKILL.md"]
+      },
+      "rationale": "Module validation and author permissions span NestJS structure and authorization."
+    },
+    {
+      "id": "flowforge-16",
+      "tags": ["flowforge", "positive"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260921_030001_f10-d1.log",
+        "line": 13,
+        "command": "search"
+      },
+      "request": {
+        "query": "role based access control admin mentor permissions who can create content"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "security"
+          }
+        ],
+        "documents": ["backend/security/SKILL.md"]
+      },
+      "rationale": "Content creation permissions require backend authorization, not accessibility roles."
+    },
+    {
+      "id": "flowforge-17",
+      "tags": ["flowforge", "positive"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260921_030001_f10-d1.log",
+        "line": 159,
+        "command": "search"
+      },
+      "request": {
+        "query": "NestJS module structure DTO validation service"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "coding"
+          }
+        ],
+        "documents": [
+          "backend/coding/SKILL.md",
+          "backend/coding/references/modules.md",
+          "backend/coding/references/dtos.md"
+        ]
+      },
+      "rationale": "NestJS module/service structure and DTO validation."
+    },
+    {
+      "id": "flowforge-18",
+      "tags": ["flowforge", "positive", "mixed"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260921_030001_f10-d1.log",
+        "line": 163,
+        "command": "search"
+      },
+      "request": {
+        "query": "react form validation react-hook-form zod mutations"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "hook"
+          },
+          {
+            "domain": "frontend",
+            "skill": "ui"
+          }
+        ],
+        "documents": ["frontend/hook/references/form-state.md", "frontend/ui/references/forms.md"]
+      },
+      "rationale": "Form-state integration with react-hook-form and zod."
+    },
+    {
+      "id": "flowforge-19",
+      "tags": ["flowforge", "positive", "mixed"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260921_030001_f10-d1.log",
+        "line": 215,
+        "command": "search"
+      },
+      "request": {
+        "query": "NestJS service transactional Prisma module writes with DTO validation and role ownership",
+        "paths": ["apps/backend/src/modules/learning-paths/learning-paths.service.ts"]
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "coding"
+          },
+          {
+            "domain": "backend",
+            "skill": "database"
+          },
+          {
+            "domain": "backend",
+            "skill": "security"
+          }
+        ],
+        "documents": ["backend/coding/SKILL.md", "backend/database/SKILL.md"]
+      },
+      "rationale": "Transactional Prisma writes belong alongside NestJS module guidance; authorization is also relevant."
+    },
+    {
+      "id": "flowforge-20",
+      "tags": ["flowforge", "positive", "explicit"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260921_030001_f10-d1.log",
+        "line": 221,
+        "command": "search"
+      },
+      "request": {
+        "query": "transactional Prisma writes in NestJS service with class-validator DTOs and roles guard",
+        "domain": "backend",
+        "skill": "coding"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "coding"
+          }
+        ],
+        "documents": ["backend/coding/SKILL.md", "backend/coding/references/dtos.md"]
+      },
+      "rationale": "The recorded request explicitly selects backend/coding; confidence is not evaluated as independent evidence."
+    },
+    {
+      "id": "flowforge-21",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260922_030001_f10-d2.log",
+        "line": 8,
+        "command": "search"
+      },
+      "request": {
+        "query": "learner enrollment in learning path, progress tracking completion state, dashboard visibility"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "Product enrollment visibility and completion policy are outside this coding vault."
+    },
+    {
+      "id": "flowforge-22",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260922_030001_f10-d2.log",
+        "line": 12,
+        "command": "search"
+      },
+      "request": {
+        "query": "mentory paths modules enrollment progress product rules"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "Product rules for enrollment paths are absent; a generic modules match does not answer the request."
+    },
+    {
+      "id": "flowforge-23",
+      "tags": ["flowforge", "positive", "mixed"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20260922_030001_f10-d2.log",
+        "line": 146,
+        "command": "search"
+      },
+      "request": {
+        "query": "NestJS enrollment progress module structure DTO validation testing",
+        "paths": [
+          "apps/backend/src/modules/enrollments/enrollments.service.ts",
+          "apps/backend/src/modules/learning-paths/learning-paths.service.ts"
+        ]
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "coding"
+          },
+          {
+            "domain": "backend",
+            "skill": "testing"
+          }
+        ],
+        "documents": ["backend/coding/SKILL.md", "backend/testing/SKILL.md"]
+      },
+      "rationale": "NestJS module and DTO work with backend testing, not frontend testing."
+    },
+    {
+      "id": "flowforge-24",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20261001_030001_f10-d3.log",
+        "line": 15,
+        "command": "search"
+      },
+      "request": {
+        "query": "learning path milestones mentor checkpoints session prompts"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "Learning-path checkpoint and session product requirements are absent."
+    },
+    {
+      "id": "flowforge-25",
+      "tags": ["flowforge", "negative"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20261001_030001_f10-d3.log",
+        "line": 134,
+        "command": "search"
+      },
+      "request": {
+        "query": "learning path milestones checkpoint states mentor session prompt"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      },
+      "rationale": "Learning-path milestone/checkpoint product policy is absent."
+    },
+    {
+      "id": "flowforge-26",
+      "tags": ["flowforge", "positive", "mixed"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20261001_030001_f10-d3.log",
+        "line": 138,
+        "command": "search"
+      },
+      "request": {
+        "query": "nestjs module api contract prisma migration conventions"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "api"
+          },
+          {
+            "domain": "backend",
+            "skill": "database"
+          },
+          {
+            "domain": "backend",
+            "skill": "coding"
+          }
+        ],
+        "documents": ["backend/api/SKILL.md", "backend/database/SKILL.md"]
+      },
+      "rationale": "API contracts and Prisma migrations span API and database guidance."
+    },
+    {
+      "id": "flowforge-27",
+      "tags": ["flowforge", "positive", "mixed"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20261002_030001_f10-d4.log",
+        "line": 8,
+        "command": "search"
+      },
+      "request": {
+        "query": "learner path completion certificate UX empty states accessibility"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "accessibility"
+          },
+          {
+            "domain": "frontend",
+            "skill": "ui"
+          }
+        ],
+        "documents": [
+          "frontend/accessibility/SKILL.md",
+          "frontend/accessibility/references/core-principles.md"
+        ]
+      },
+      "rationale": "Accessible UI empty states; product certificate rules are not supplied by the vault."
+    },
+    {
+      "id": "flowforge-28",
+      "tags": ["flowforge", "positive"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20261002_080340_f10-d4.log",
+        "line": 127,
+        "command": "search"
+      },
+      "request": {
+        "query": "accessibility requirements new page ARIA jest-axe"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "accessibility"
+          }
+        ],
+        "documents": [
+          "frontend/accessibility/SKILL.md",
+          "frontend/accessibility/references/testing.md"
+        ]
+      },
+      "rationale": "ARIA accessibility requirements with jest-axe testing."
+    },
+    {
+      "id": "flowforge-29",
+      "tags": ["flowforge", "positive", "mixed"],
+      "source": {
+        "kind": "flowforge",
+        "file": "20261002_080340_f10-d4.log",
+        "line": 128,
+        "command": "search"
+      },
+      "request": {
+        "query": "frontend component testing standards react query feature pages"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "testing"
+          },
+          {
+            "domain": "frontend",
+            "skill": "react-query"
+          }
+        ],
+        "documents": [
+          "frontend/testing/SKILL.md",
+          "frontend/react-query/SKILL.md",
+          "frontend/testing/references/mutations.md"
+        ]
+      },
+      "rationale": "Component tests around React Query feature pages require both testing and query context."
+    }
+  ]
+}

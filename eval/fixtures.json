@@ -1,0 +1,580 @@
+{
+  "schemaVersion": 1,
+  "name": "Fixture retrieval quality",
+  "vault": "../tests/fixtures/coding",
+  "thresholds": {
+    "routeAccuracy": {
+      "min": 0.9
+    },
+    "documentRecallAtK": {
+      "min": 0.8
+    },
+    "confidentErrorRate": {
+      "max": 0.1
+    }
+  },
+  "cases": [
+    {
+      "id": "fixture-01",
+      "tags": ["paraphrase", "en", "react-query"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "invalidate React Query cache after updating a course"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "react-query"
+          }
+        ],
+        "documents": [
+          "frontend/react-query/SKILL.md",
+          "frontend/react-query/references/cache-invalidation.md"
+        ]
+      }
+    },
+    {
+      "id": "fixture-02",
+      "tags": ["paraphrase", "en", "react-query"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "optimistic mutation update"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "react-query"
+          }
+        ],
+        "documents": [
+          "frontend/react-query/SKILL.md",
+          "frontend/react-query/references/mutations.md"
+        ]
+      }
+    },
+    {
+      "id": "fixture-03",
+      "tags": ["paraphrase", "en", "react-query"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "useMutation queryClient invalidateQueries"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "react-query"
+          }
+        ],
+        "documents": [
+          "frontend/react-query/SKILL.md",
+          "frontend/react-query/references/cache-invalidation.md"
+        ]
+      }
+    },
+    {
+      "id": "fixture-04",
+      "tags": ["paraphrase", "ru", "react-query"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "Как вызвать invalidateQueries после useMutation?"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "react-query"
+          }
+        ],
+        "documents": [
+          "frontend/react-query/SKILL.md",
+          "frontend/react-query/references/cache-invalidation.md"
+        ]
+      }
+    },
+    {
+      "id": "fixture-05",
+      "tags": ["paraphrase", "en", "hook"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "rename this custom hook and improve its return interface"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "hook"
+          }
+        ],
+        "documents": ["frontend/hook/SKILL.md", "frontend/hook/references/core-principles.md"]
+      }
+    },
+    {
+      "id": "fixture-06",
+      "tags": ["paraphrase", "en", "hook"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "design a custom hook return interface"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "hook"
+          }
+        ],
+        "documents": ["frontend/hook/SKILL.md", "frontend/hook/references/core-principles.md"]
+      }
+    },
+    {
+      "id": "fixture-07",
+      "tags": ["paraphrase", "en", "hook"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "custom hook named return object"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "hook"
+          }
+        ],
+        "documents": ["frontend/hook/SKILL.md", "frontend/hook/references/core-principles.md"]
+      }
+    },
+    {
+      "id": "fixture-08",
+      "tags": ["paraphrase", "ru", "hook"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "Как оформить custom hook return interface?"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "hook"
+          }
+        ],
+        "documents": ["frontend/hook/SKILL.md", "frontend/hook/references/core-principles.md"]
+      }
+    },
+    {
+      "id": "fixture-09",
+      "tags": ["paraphrase", "en", "routing"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "protect route and redirect unauthenticated user"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "routing"
+          }
+        ],
+        "documents": ["frontend/routing/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-10",
+      "tags": ["paraphrase", "en", "routing"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "useNavigate Navigate useParams"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "routing"
+          }
+        ],
+        "documents": ["frontend/routing/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-11",
+      "tags": ["paraphrase", "en", "routing"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "React Router route guards"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "routing"
+          }
+        ],
+        "documents": ["frontend/routing/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-12",
+      "tags": ["paraphrase", "ru", "routing"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "Как защитить React Router route?"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "routing"
+          }
+        ],
+        "documents": ["frontend/routing/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-13",
+      "tags": ["paraphrase", "en", "database"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "transaction around several Prisma writes"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "database"
+          }
+        ],
+        "documents": ["backend/database/SKILL.md", "backend/database/references/transactions.md"]
+      }
+    },
+    {
+      "id": "fixture-14",
+      "tags": ["paraphrase", "en", "database"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "Prisma database transactions"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "database"
+          }
+        ],
+        "documents": ["backend/database/SKILL.md", "backend/database/references/transactions.md"]
+      }
+    },
+    {
+      "id": "fixture-15",
+      "tags": ["paraphrase", "en", "database"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "efficient database migrations and queries"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "database"
+          }
+        ],
+        "documents": ["backend/database/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-16",
+      "tags": ["paraphrase", "ru", "database"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "Как выполнить Prisma transaction?"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "database"
+          }
+        ],
+        "documents": ["backend/database/SKILL.md", "backend/database/references/transactions.md"]
+      }
+    },
+    {
+      "id": "fixture-17",
+      "tags": ["paraphrase", "en", "api"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "design pagination query params and response DTO"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "api"
+          }
+        ],
+        "documents": ["backend/api/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-18",
+      "tags": ["paraphrase", "en", "api"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "RESTful API pagination response"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "api"
+          }
+        ],
+        "documents": ["backend/api/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-19",
+      "tags": ["paraphrase", "en", "api"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "NestJS endpoints request response"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "api"
+          }
+        ],
+        "documents": ["backend/api/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-20",
+      "tags": ["paraphrase", "ru", "api"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "Как описать pagination response DTO?"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "api"
+          }
+        ],
+        "documents": ["backend/api/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-21",
+      "tags": ["paraphrase", "en", "serena"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "find symbol references before editing a method"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "common",
+            "skill": "serena"
+          }
+        ],
+        "documents": ["common/serena/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-22",
+      "tags": ["paraphrase", "en", "serena"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "semantic symbol navigation"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "common",
+            "skill": "serena"
+          }
+        ],
+        "documents": ["common/serena/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-23",
+      "tags": ["paraphrase", "en", "serena"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "use Serena tools for symbol editing"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "common",
+            "skill": "serena"
+          }
+        ],
+        "documents": ["common/serena/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-24",
+      "tags": ["paraphrase", "ru", "serena"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "Найди symbol references через Serena"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "common",
+            "skill": "serena"
+          }
+        ],
+        "documents": ["common/serena/SKILL.md"]
+      }
+    },
+    {
+      "id": "fixture-25",
+      "tags": ["negative"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "zyxwvu astronomy nebula"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      }
+    },
+    {
+      "id": "fixture-26",
+      "tags": ["negative"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "how to bake sourdough bread"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      }
+    },
+    {
+      "id": "fixture-27",
+      "tags": ["negative"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "course authoring"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      }
+    },
+    {
+      "id": "fixture-28",
+      "tags": ["negative"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "как приготовить борщ"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      }
+    },
+    {
+      "id": "fixture-29",
+      "tags": ["negative"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "deployment kubernetes terraform"
+      },
+      "expected": {
+        "routes": [],
+        "documents": []
+      }
+    },
+    {
+      "id": "fixture-30",
+      "tags": ["mixed"],
+      "source": {
+        "kind": "authored"
+      },
+      "request": {
+        "query": "Design custom hook return { with useMutation",
+        "maxSkills": 2
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "hook"
+          },
+          {
+            "domain": "frontend",
+            "skill": "react-query"
+          }
+        ],
+        "documents": ["frontend/hook/SKILL.md", "frontend/react-query/SKILL.md"]
+      }
+    }
+  ]
+}

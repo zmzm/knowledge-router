@@ -9,8 +9,15 @@ import type {
 } from '../types.js';
 import { compareText } from '../storage.js';
 import { BM25 } from './bm25.js';
-import { containsPhrase, normalizeQuery, tokenize } from './tokenizer.js';
-import { matchingTerms, metadataScore, pathScore, scoreText, type Score } from './scorer.js';
+import { containsPhrase, normalizeQuery, tokenize, type Query } from './tokenizer.js';
+import {
+  matchingTerms,
+  metadataScore,
+  pathScore,
+  scoreText,
+  strongTextMatch,
+  type Score,
+} from './scorer.js';
 
 interface Candidate extends Score {
   doc: IndexedDocument;
@@ -31,12 +38,24 @@ export class SearchEngine {
   private readonly sections: Section[];
   private readonly sectionCorpus: BM25;
   private readonly inactiveSkills: Set<string>;
+  private readonly skills = new Map<string, IndexedDocument>();
 
   constructor(
     documents: IndexedDocument[],
     private readonly maxSections: number,
   ) {
     this.documents = [...documents].sort((a, b) => compareText(a.path, b.path));
+    for (const doc of this.documents) {
+      if (doc.kind !== 'skill') {
+        continue;
+      }
+      const key = `${doc.domain}/${doc.skill}`;
+      const existing = this.skills.get(key);
+      if (existing) {
+        throw new Error(`Duplicate skill ${key}: ${existing.path} and ${doc.path}`);
+      }
+      this.skills.set(key, doc);
+    }
     this.inactiveSkills = new Set(
       documents
         .filter((doc) => doc.kind === 'skill' && inactive(doc))
@@ -68,7 +87,18 @@ export class SearchEngine {
     return !this.inactiveSkills.has(`${doc.domain}/${doc.skill}`);
   }
 
-  private candidates(request: RouteRequest): Candidate[] {
+  private referenceOwner(doc: IndexedDocument): IndexedDocument | undefined {
+    const skill = this.skills.get(`${doc.domain}/${doc.skill}`);
+    if (skill) {
+      const root = `${skill.path.slice(0, skill.path.lastIndexOf('/'))}/references/`;
+      if (doc.path.startsWith(root)) {
+        return skill;
+      }
+    }
+    return undefined;
+  }
+
+  private candidates(request: RouteRequest, fallback = false): Candidate[] {
     const query = normalizeQuery(request.query);
     if (
       request.paths &&
@@ -80,8 +110,19 @@ export class SearchEngine {
       throw new Error(`Unknown domain: ${request.domain}`);
     }
     const referenceEvidence = new Map<string, Score>();
+    const namedDomains = new Set(
+      this.documents
+        .filter((doc) => doc.kind === 'skill' && this.eligible(doc, request))
+        .map((doc) => doc.domain)
+        .filter((domain) => domain && containsPhrase(query.text, domain)),
+    );
     for (const doc of this.documents) {
-      if (doc.kind !== 'reference' || !this.eligible(doc, request)) {
+      if (
+        fallback ||
+        doc.kind !== 'reference' ||
+        !this.eligible(doc, request) ||
+        !this.referenceOwner(doc)
+      ) {
         continue;
       }
       const evidence = metadataScore(doc, query);
@@ -89,6 +130,31 @@ export class SearchEngine {
       if (evidence.score > (referenceEvidence.get(key)?.score ?? 0)) {
         referenceEvidence.set(key, evidence);
       }
+    }
+    if (fallback) {
+      this.sections.forEach(({ doc, heading }, index) => {
+        if (!this.eligible(doc, request) || !this.referenceOwner(doc)) {
+          return;
+        }
+        const lexical = this.sectionCorpus.score(index, query.terms);
+        if (!strongTextMatch(lexical.matches, query)) {
+          return;
+        }
+        const key = `${doc.domain}/${doc.skill}`;
+        const score = (3 * lexical.score) / (lexical.score + 2);
+        if (score > (referenceEvidence.get(key)?.score ?? 0)) {
+          referenceEvidence.set(key, {
+            score,
+            metadataScore: 0,
+            reasons: [
+              {
+                type: 'fulltext',
+                value: `${lexical.matches.join(', ')} (reference text: ${doc.path}, lines ${heading.startLine}-${heading.endLine})`,
+              },
+            ],
+          });
+        }
+      });
     }
     const candidates: Candidate[] = [];
     this.documents.forEach((doc, index) => {
@@ -102,26 +168,44 @@ export class SearchEngine {
       const scored = scoreText(doc, query, lexical);
       const support = referenceEvidence.get(`${doc.domain}/${doc.skill}`);
       if (support && support.score > 0) {
-        scored.score += Math.min(12, support.score * 0.4);
+        scored.score += fallback ? support.score : Math.min(12, support.score * 0.4);
         scored.metadataScore += Math.min(12, support.metadataScore * 0.4);
         scored.reasons.push(
           ...support.reasons.map((reason) => ({
             ...reason,
-            value: `${reason.value} (reference metadata)`,
+            value: fallback ? reason.value : `${reason.value} (reference metadata)`,
           })),
         );
       }
       // Query evidence is required before adding path signals.
       if (
         !request.skill &&
-        (scored.score < 5 || (scored.metadataScore < 3 && lexical.matches.length < 2))
+        (fallback
+          ? !strongTextMatch(lexical.matches, query) && !support
+          : scored.score < 5 || (scored.metadataScore < 3 && lexical.matches.length < 2))
       ) {
         return;
+      }
+      if (fallback) {
+        scored.reasons.push({
+          type: 'fallback',
+          value: 'Strong text match; no metadata route found',
+        });
       }
       const paths = pathScore(doc, request.paths ?? []);
       if (paths.length) {
         scored.score += 8;
         scored.reasons.push(...paths);
+      }
+      // A domain name helps rank existing evidence, but cannot create a route by itself.
+      if (
+        !request.domain &&
+        !request.skill &&
+        namedDomains.size === 1 &&
+        namedDomains.has(doc.domain)
+      ) {
+        scored.score += 8;
+        scored.reasons.push({ type: 'domain', value: doc.domain! });
       }
       if (request.skill) {
         scored.reasons.push({ type: 'explicit', value: `skill: ${request.skill}` });
@@ -134,8 +218,15 @@ export class SearchEngine {
     if (request.skill && !candidates.length) {
       throw new Error(`Unknown or excluded skill: ${request.skill}`);
     }
-    if (request.skill && !request.domain && candidates.length > 1) {
-      throw new Error(`Skill ${request.skill} exists in multiple domains; provide domain`);
+    if (request.skill && candidates.length > 1) {
+      throw new Error(
+        `Ambiguous skill ${request.skill}; select a unique skill and domain: ${candidates
+          .map(({ doc }) => `${doc.domain}/${doc.skill}`)
+          .join(', ')}`,
+      );
+    }
+    if (!candidates.length && !request.skill && !fallback) {
+      return this.candidates(request, true);
     }
 
     // Domain evidence is the strongest skill, with a small contribution from its index.
@@ -200,10 +291,14 @@ export class SearchEngine {
     };
   }
 
-  search(request: SearchRequest): SearchResponse {
+  search(request: SearchRequest): Omit<SearchResponse, 'snapshot'> {
     const limit = request.limit ?? 5;
+    const maxSkills = request.maxSkills ?? 1;
     if (!Number.isInteger(limit) || limit < 0) {
       throw new Error('limit must be a non-negative integer');
+    }
+    if (maxSkills !== 1 && maxSkills !== 2) {
+      throw new Error('maxSkills must be 1 or 2');
     }
     const candidates = this.candidates(request);
     const route = this.routeResult(request, candidates);
@@ -212,50 +307,52 @@ export class SearchEngine {
     }
     const query = normalizeQuery(request.query);
     const results: SearchResult[] = [];
-    const primary = this.documents.find(
-      (doc) =>
-        doc.kind === 'skill' &&
-        route.skill &&
-        doc.domain === route.domain &&
-        doc.skill === route.skill &&
-        this.eligible(doc, request),
-    );
-    if (primary) {
-      const candidate = candidates.find((item) => item.doc === primary)!;
-      results.push(this.result(primary, candidate));
+    const candidate = candidates[0];
+    const selected = candidate ? [candidate] : [];
+    const relatedRoutes: RouteResult[] = [];
+    if (candidate && maxSkills === 2 && limit >= 2 && !request.skill) {
+      const related = candidates
+        .slice(1)
+        .find(
+          (item) =>
+            item.score >= candidate.score * 0.75 &&
+            metadataScore(item.doc, query).score >= 3 &&
+            (item.doc.domain === candidate.doc.domain ||
+              (candidate.doc.domain &&
+                item.doc.domain &&
+                containsPhrase(query.text, candidate.doc.domain) &&
+                containsPhrase(query.text, item.doc.domain))),
+        );
+      if (related) {
+        const explanation = {
+          type: 'related' as const,
+          value: 'Additional skill within 25% of the primary score',
+        };
+        selected.push({ ...related, reasons: [...related.reasons, explanation] });
+        const relatedRoute = this.routeResult(request, [
+          related,
+          ...candidates.filter((item) => item !== related),
+        ]);
+        relatedRoutes.push({ ...relatedRoute, reasons: [...relatedRoute.reasons, explanation] });
+      }
     }
-    const references: SearchResult[] = [];
-    this.sections.forEach(({ doc, heading }, index) => {
-      if (
-        !primary ||
-        doc.domain !== primary.domain ||
-        doc.skill !== primary.skill ||
-        !this.eligible(doc, request)
-      ) {
-        return;
+    results.push(...selected.map((item) => this.result(item.doc, item)));
+    const referenceBudget = Math.min(this.maxSections, limit - results.length);
+    const queues = selected.map((item) => this.referenceResults(item.doc, request, query));
+    let referenceCount = 0;
+    for (
+      let rank = 0;
+      referenceCount < referenceBudget && queues.some((queue) => rank < queue.length);
+      rank++
+    ) {
+      for (const queue of queues) {
+        const reference = queue[rank];
+        if (reference && referenceCount < referenceBudget) {
+          results.push(reference);
+          referenceCount++;
+        }
       }
-      // A reference must physically belong to the primary skill's references subtree.
-      const referenceRoot = `${primary.path.slice(0, primary.path.lastIndexOf('/'))}/references/`;
-      if (!doc.path.startsWith(referenceRoot)) {
-        return;
-      }
-      const localMatches = matchingTerms(
-        `${heading.title} ${heading.prose} ${heading.code}`,
-        query,
-      );
-      if (!localMatches.length) {
-        return;
-      }
-      const scored = scoreText(doc, query, this.sectionCorpus.score(index, query.terms), heading);
-      if (scored.score < 5) {
-        return;
-      }
-      references.push(this.result(doc, scored, heading));
-    });
-    references.sort(
-      (a, b) => b.score - a.score || compareText(a.path, b.path) || a.startLine - b.startLine,
-    );
-    results.push(...references.slice(0, Math.min(this.maxSections, limit - results.length)));
+    }
 
     // Generic root bodies cannot flood a routed result. Require an explicit title or curated phrase.
     const roots: SearchResult[] = [];
@@ -287,7 +384,41 @@ export class SearchEngine {
     if (roots[0] && results.length < limit) {
       results.push(roots[0]);
     }
-    return { route, results };
+    return { route, ...(relatedRoutes.length ? { relatedRoutes } : {}), results };
+  }
+
+  private referenceResults(
+    primary: IndexedDocument,
+    request: SearchRequest,
+    query: Query,
+  ): SearchResult[] {
+    const references: SearchResult[] = [];
+    const fallback: SearchResult[] = [];
+    this.sections.forEach(({ doc, heading }, index) => {
+      if (this.referenceOwner(doc) !== primary || !this.eligible(doc, request)) {
+        return;
+      }
+      const localMatches = matchingTerms(
+        `${heading.title} ${heading.prose} ${heading.code}`,
+        query,
+      );
+      if (!localMatches.length) {
+        return;
+      }
+      const scored = scoreText(doc, query, this.sectionCorpus.score(index, query.terms), heading);
+      if (scored.score >= 5) {
+        references.push(this.result(doc, scored, heading));
+      } else if (strongTextMatch(localMatches, query)) {
+        scored.reasons.push({
+          type: 'fallback',
+          value: 'Strong text match; no ranked reference sections found',
+        });
+        fallback.push(this.result(doc, scored, heading));
+      }
+    });
+    return (references.length ? references : fallback).sort(
+      (a, b) => b.score - a.score || compareText(a.path, b.path) || a.startLine - b.startLine,
+    );
   }
 
   private result(doc: IndexedDocument, score: Score, heading?: IndexedHeading): SearchResult {
@@ -299,6 +430,7 @@ export class SearchEngine {
       section: heading ? heading.hierarchy.join(' > ') || heading.title : undefined,
       score: round(score.score),
       content: heading?.content ?? doc.content,
+      hash: doc.hash,
       startLine: heading?.startLine ?? 1,
       endLine: heading?.endLine ?? doc.content.split(/\r?\n/).length,
       reasons: score.reasons,

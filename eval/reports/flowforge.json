@@ -1,0 +1,665 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "dataset": "Flow Forge observed queries",
+  "labelReview": "agent-reviewed; awaiting user review",
+  "datasetHash": "10a31e97b7990b51db532d024674baf042c956222d6080185dce94568ad25cb9",
+  "vaultFingerprint": "b6dbcb3e0a0bca8dcf5878d04c6bb8550851629960d8fc67781e56c7738ceb2f",
+  "vaultDocuments": 147,
+  "k": 5,
+  "confidenceThreshold": 0.5,
+  "before": {
+    "description": "After priorities 1–3, before metadata deduplication, syntax trigger fix, and multi-skill search",
+    "metrics": {
+      "cases": 29,
+      "routeAccuracy": 0.6896551724137931,
+      "positiveRouteAccuracy": 0.7368421052631579,
+      "abstentionAccuracy": 0.6,
+      "routeRecallAt3": 0.7931034482758621,
+      "documentRecallAtK": 0.4473684210526317,
+      "confidentRoutes": 8,
+      "confidentErrors": 4,
+      "confidentErrorRate": 0.5
+    },
+    "failures": [
+      {
+        "id": "flowforge-01",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "auth"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/database/SKILL.md"]
+      },
+      {
+        "id": "flowforge-02",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "security"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-04",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "ui"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-05",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "react-query"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/react-query/references/cache-invalidation.md"]
+      },
+      {
+        "id": "flowforge-06",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-08",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "accessibility"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-09",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/coding/references/component-structure.md"]
+      },
+      {
+        "id": "flowforge-12",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "common",
+          "skill": "task-workflow"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-13",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "common",
+          "skill": "task-workflow"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": [
+          "common/engineering/SKILL.md",
+          "common/engineering/references/state-and-recovery.md"
+        ]
+      },
+      {
+        "id": "flowforge-14",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "security"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/coding/SKILL.md"]
+      },
+      {
+        "id": "flowforge-15",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-16",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "accessibility"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-17",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/coding/references/dtos.md"]
+      },
+      {
+        "id": "flowforge-18",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "hook"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/ui/references/forms.md"]
+      },
+      {
+        "id": "flowforge-19",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "accessibility"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/coding/SKILL.md", "backend/database/SKILL.md"]
+      },
+      {
+        "id": "flowforge-22",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-23",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "testing"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/coding/SKILL.md"]
+      },
+      {
+        "id": "flowforge-26",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "api"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/database/SKILL.md"]
+      },
+      {
+        "id": "flowforge-27",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "accessibility"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/accessibility/references/core-principles.md"]
+      },
+      {
+        "id": "flowforge-29",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "react-query"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": [
+          "frontend/testing/SKILL.md",
+          "frontend/testing/references/mutations.md"
+        ]
+      }
+    ]
+  },
+  "afterSingleSkill": {
+    "metrics": {
+      "cases": 29,
+      "routeAccuracy": 0.7241379310344828,
+      "positiveRouteAccuracy": 0.7894736842105263,
+      "abstentionAccuracy": 0.6,
+      "routeRecallAt3": 0.7931034482758621,
+      "documentRecallAtK": 0.4736842105263159,
+      "confidentRoutes": 5,
+      "confidentErrors": 1,
+      "confidentErrorRate": 0.2
+    },
+    "failures": [
+      {
+        "id": "flowforge-01",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "auth"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/database/SKILL.md"]
+      },
+      {
+        "id": "flowforge-02",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "security"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-04",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "ui"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-05",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "react-query"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/react-query/references/cache-invalidation.md"]
+      },
+      {
+        "id": "flowforge-06",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-08",
+        "routeCorrect": false,
+        "actualRoute": null,
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-09",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/coding/references/component-structure.md"]
+      },
+      {
+        "id": "flowforge-12",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "common",
+          "skill": "task-workflow"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-13",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "common",
+          "skill": "task-workflow"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": [
+          "common/engineering/SKILL.md",
+          "common/engineering/references/state-and-recovery.md"
+        ]
+      },
+      {
+        "id": "flowforge-14",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "security"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/coding/SKILL.md"]
+      },
+      {
+        "id": "flowforge-15",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-16",
+        "routeCorrect": false,
+        "actualRoute": null,
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-17",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/coding/references/dtos.md"]
+      },
+      {
+        "id": "flowforge-18",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "hook"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/ui/references/forms.md"]
+      },
+      {
+        "id": "flowforge-19",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/database/SKILL.md"]
+      },
+      {
+        "id": "flowforge-22",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-23",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "testing"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/coding/SKILL.md"]
+      },
+      {
+        "id": "flowforge-26",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "api"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/database/SKILL.md"]
+      },
+      {
+        "id": "flowforge-27",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "accessibility"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/accessibility/references/core-principles.md"]
+      },
+      {
+        "id": "flowforge-29",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "react-query"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": [
+          "frontend/testing/SKILL.md",
+          "frontend/testing/references/mutations.md"
+        ]
+      }
+    ]
+  },
+  "afterTwoSkills": {
+    "metrics": {
+      "cases": 29,
+      "routeAccuracy": 0.7241379310344828,
+      "positiveRouteAccuracy": 0.7894736842105263,
+      "abstentionAccuracy": 0.6,
+      "routeRecallAt3": 0.7931034482758621,
+      "documentRecallAtK": 0.5087719298245614,
+      "confidentRoutes": 5,
+      "confidentErrors": 1,
+      "confidentErrorRate": 0.2
+    },
+    "failures": [
+      {
+        "id": "flowforge-01",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "auth"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/database/SKILL.md"]
+      },
+      {
+        "id": "flowforge-02",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "security"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-04",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "ui"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-05",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "react-query"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/react-query/references/cache-invalidation.md"]
+      },
+      {
+        "id": "flowforge-06",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-08",
+        "routeCorrect": false,
+        "actualRoute": null,
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-09",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/coding/references/component-structure.md"]
+      },
+      {
+        "id": "flowforge-12",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "common",
+          "skill": "task-workflow"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-13",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "common",
+          "skill": "task-workflow"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": [
+          "common/engineering/SKILL.md",
+          "common/engineering/references/state-and-recovery.md"
+        ]
+      },
+      {
+        "id": "flowforge-14",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "security"
+        },
+        "relatedRoutes": [
+          {
+            "domain": "backend",
+            "skill": "api"
+          }
+        ],
+        "missingDocuments": ["backend/coding/SKILL.md"]
+      },
+      {
+        "id": "flowforge-15",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-16",
+        "routeCorrect": false,
+        "actualRoute": null,
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/security/SKILL.md"]
+      },
+      {
+        "id": "flowforge-17",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [
+          {
+            "domain": "backend",
+            "skill": "security"
+          }
+        ],
+        "missingDocuments": ["backend/coding/references/dtos.md"]
+      },
+      {
+        "id": "flowforge-18",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "hook"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/ui/references/forms.md"]
+      },
+      {
+        "id": "flowforge-19",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [
+          {
+            "domain": "backend",
+            "skill": "security"
+          }
+        ],
+        "missingDocuments": ["backend/database/SKILL.md"]
+      },
+      {
+        "id": "flowforge-22",
+        "routeCorrect": false,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "coding"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": []
+      },
+      {
+        "id": "flowforge-23",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "testing"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/coding/SKILL.md"]
+      },
+      {
+        "id": "flowforge-26",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "backend",
+          "skill": "api"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["backend/database/SKILL.md"]
+      },
+      {
+        "id": "flowforge-27",
+        "routeCorrect": true,
+        "actualRoute": {
+          "domain": "frontend",
+          "skill": "accessibility"
+        },
+        "relatedRoutes": [],
+        "missingDocuments": ["frontend/accessibility/references/core-principles.md"]
+      }
+    ]
+  }
+}

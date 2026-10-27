@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import {
   mkdir,
   readFile,
@@ -12,7 +12,7 @@ import {
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import picomatch from 'picomatch';
 import { indexDocument } from './parser.js';
-import type { RetrieverOptions, VaultIndex } from './types.js';
+import type { FreshnessResult, RetrieverOptions, VaultIndex } from './types.js';
 
 export const compareText = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
 export const configKey = (options: RetrieverOptions): string =>
@@ -78,7 +78,7 @@ export async function buildIndex(
     }
   }
   return {
-    version: 1,
+    version: 2,
     vaultPath,
     configKey: configKey(options),
     generatedAt: new Date().toISOString(),
@@ -99,14 +99,18 @@ export async function loadIndex(
     }
     const index = value as VaultIndex;
     if (
-      index.version !== 1 ||
+      index.version !== 2 ||
       index.vaultPath !== vaultPath ||
       index.configKey !== configKey(options) ||
+      typeof index.generatedAt !== 'string' ||
+      !Number.isFinite(Date.parse(index.generatedAt)) ||
       !Array.isArray(index.documents)
     ) {
       return;
     }
     // Validate the fields consumed by retrieval; malformed/old caches are rebuilt.
+    const paths = new Set<string>();
+    const skills = new Set<string>();
     for (const doc of index.documents) {
       if (
         !doc ||
@@ -148,6 +152,17 @@ export async function loadIndex(
       ) {
         return;
       }
+      if (paths.has(doc.path)) {
+        return;
+      }
+      paths.add(doc.path);
+      if (doc.kind === 'skill') {
+        const key = `${doc.domain}/${doc.skill}`;
+        if (skills.has(key)) {
+          return;
+        }
+        skills.add(key);
+      }
     }
     return index;
   } catch (error) {
@@ -156,6 +171,40 @@ export async function loadIndex(
     }
     throw error;
   }
+}
+
+/** Compare source hashes against this snapshot without parsing YAML or rewriting the cache. */
+export async function checkIndexFreshness(
+  vaultPath: string,
+  options: RetrieverOptions,
+  index: VaultIndex,
+): Promise<FreshnessResult> {
+  const files = await discover(vaultPath, options);
+  const current = new Set(files);
+  const indexed = new Map(index.documents.map((doc) => [doc.path, doc]));
+  const added = files.filter((path) => !indexed.has(path)).sort(compareText);
+  const deleted = index.documents
+    .filter((doc) => !current.has(doc.path))
+    .map((doc) => doc.path)
+    .sort(compareText);
+  const modified: string[] = [];
+  for (const path of files) {
+    const doc = indexed.get(path);
+    if (!doc) {
+      continue;
+    }
+    const content = await readFile(await safePath(vaultPath, path), 'utf8');
+    if (createHash('sha256').update(content).digest('hex') !== doc.hash) {
+      modified.push(path);
+    }
+  }
+  return {
+    snapshot: { version: index.version, generatedAt: index.generatedAt },
+    fresh: !added.length && !modified.length && !deleted.length,
+    added,
+    modified: modified.sort(compareText),
+    deleted,
+  };
 }
 
 export async function saveIndex(path: string, index: VaultIndex): Promise<void> {

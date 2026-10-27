@@ -8,6 +8,7 @@ const help = `Knowledge Router — deterministic Markdown retrieval
 
 Usage:
   knowledge build [vault] [--cache PATH] [--json]
+  knowledge status [--vault PATH] [--cache PATH] [--json]
   knowledge route "query" [options]
   knowledge search "query" [options]
   knowledge read relative/path.md [--section "Heading > Child"] [options]
@@ -19,6 +20,7 @@ Options:
   --domain NAME         Restrict to a domain
   --skill NAME          Select a skill explicitly
   --limit N             Maximum search results (default 5)
+  --max-skills N        Include up to 1 or 2 skills with close scores (search only)
   --include-inactive    Include deprecated and archived guidance
   --section TITLE      Read one heading chunk
   --start-line N        Read from this line (1-based, inclusive)
@@ -27,6 +29,8 @@ Options:
   --help                Show help
 
 Existing indexes are snapshots. Run build after editing the vault.
+Use status to check source hashes for added, modified, or deleted documents.
+Search includes guidance content; use --json for structured agent consumption.
 `;
 
 function numeric(value: string | undefined, name: string): number | undefined {
@@ -40,18 +44,44 @@ function numeric(value: string | undefined, name: string): number | undefined {
 }
 
 function formatRoute(route: RouteResult): string {
-  return `Domain: ${route.domain ?? '(unresolved)'}\nSkill: ${route.skill ?? '(unresolved)'}\nConfidence: ${route.confidence}`;
+  const lines = [
+    `Domain: ${route.domain ?? '(unresolved)'}`,
+    `Skill: ${route.skill ?? '(unresolved)'}`,
+    `Confidence: ${route.confidence} (heuristic, not a probability)`,
+  ];
+  if (route.reasons.length) {
+    lines.push('Matches:', ...route.reasons.map((reason) => `- ${reason.type}: ${reason.value}`));
+  }
+  if (route.alternatives?.length) {
+    lines.push(
+      'Alternatives:',
+      ...route.alternatives.map(
+        (candidate) =>
+          `- ${candidate.domain}/${candidate.skill} (confidence: ${candidate.confidence})`,
+      ),
+    );
+  }
+  if (!route.skill) {
+    lines.push(
+      'Refine the query with an operation and technology; add --path for affected project files or --domain/--skill when known.',
+    );
+  }
+  return lines.join('\n');
 }
 
 function formatSearch(response: SearchResponse): string {
-  return `${formatRoute(response.route)}\n\n${
+  const related = response.relatedRoutes?.length
+    ? `\nRelated skills: ${response.relatedRoutes.map((route) => `${route.domain}/${route.skill}`).join(', ')}`
+    : '';
+  return `Snapshot: ${response.snapshot.generatedAt}\n${formatRoute(response.route)}${related}\n\n${
     response.results.length
       ? response.results
           .map(
             (result, i) =>
               `${i + 1}. ${result.path}${result.section ? `\n   section: ${result.section}` : ''}\n   score: ${result.score}` +
               `\n   lines: ${result.startLine}–${result.endLine}\n   matches:\n` +
-              result.reasons.map((reason) => `   - ${reason.type}: ${reason.value}`).join('\n'),
+              result.reasons.map((reason) => `   - ${reason.type}: ${reason.value}`).join('\n') +
+              `\n\n${result.content}`,
           )
           .join('\n\n')
       : 'No relevant context found.'
@@ -68,6 +98,7 @@ async function main(): Promise<void> {
       domain: { type: 'string' },
       skill: { type: 'string' },
       limit: { type: 'string' },
+      'max-skills': { type: 'string' },
       section: { type: 'string' },
       'start-line': { type: 'string' },
       'end-line': { type: 'string' },
@@ -81,19 +112,26 @@ async function main(): Promise<void> {
     return;
   }
   const [command, argument] = positionals;
-  if (!['build', 'route', 'search', 'read'].includes(command!)) {
+  if (!['build', 'status', 'route', 'search', 'read'].includes(command!)) {
     throw new Error(`Unknown command: ${command}`);
   }
   if (positionals.length > 2) {
     throw new Error('Unexpected arguments; quote the query as one argument');
   }
-  if (command !== 'build' && !argument) {
+  if (command === 'status' && argument) {
+    throw new Error('status does not accept an argument; use --vault');
+  }
+  if (command !== 'build' && command !== 'status' && !argument) {
     throw new Error(`${command} requires ${command === 'read' ? 'a path' : 'a query'}`);
   }
   if (command === 'build' && argument && values.vault) {
     throw new Error('Use either a build vault argument or --vault');
   }
   const limit = numeric(values.limit, '--limit');
+  const maxSkills = numeric(values['max-skills'], '--max-skills');
+  if (values['max-skills'] !== undefined && command !== 'search') {
+    throw new Error('--max-skills is only available for search');
+  }
   const startLine = numeric(values['start-line'], '--start-line');
   const endLine = numeric(values['end-line'], '--end-line');
   const vault = resolve(
@@ -110,6 +148,20 @@ async function main(): Promise<void> {
       values.json
         ? JSON.stringify({ vault: retriever.vaultPath, index: retriever.cachePath })
         : `Built ${retriever.cachePath}`,
+    );
+  } else if (command === 'status') {
+    const result = await retriever.checkFreshness();
+    console.log(
+      values.json
+        ? JSON.stringify(result, null, 2)
+        : [
+            `Index: ${result.fresh ? 'fresh' : 'stale'}`,
+            `Snapshot: ${result.snapshot.generatedAt}`,
+            ...result.added.map((path) => `Added: ${path}`),
+            ...result.modified.map((path) => `Modified: ${path}`),
+            ...result.deleted.map((path) => `Deleted: ${path}`),
+            ...(result.fresh ? [] : ['Run knowledge build to refresh the snapshot.']),
+          ].join('\n'),
     );
   } else if (command === 'read') {
     const result = await retriever.read({
@@ -131,7 +183,7 @@ async function main(): Promise<void> {
       const result = await retriever.route(request);
       console.log(values.json ? JSON.stringify(result, null, 2) : formatRoute(result));
     } else {
-      const result = await retriever.search({ ...request, limit });
+      const result = await retriever.search({ ...request, limit, maxSkills });
       console.log(values.json ? JSON.stringify(result, null, 2) : formatSearch(result));
     }
   }

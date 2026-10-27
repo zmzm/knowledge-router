@@ -18,7 +18,8 @@
   "files": [
     "dist",
     "README.md",
-    "AGENT-USAGE.md"
+    "AGENT-USAGE.md",
+    "scripts/knowledge"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -27,8 +28,9 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "verify": "npm run lint && npm run format:check && npm test",
+    "verify": "npm run lint && npm run format:check && npm test && node scripts/evaluate.mjs --check --summary",
     "test": "npm run build && node --test tests/*.test.mjs",
+    "eval": "npm run build && node scripts/evaluate.mjs",
     "validate:vault": "npm run build && node scripts/validate-vault.mjs",
     "prepack": "npm run build"
   },

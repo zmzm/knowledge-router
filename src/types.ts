@@ -46,8 +46,11 @@ export interface SearchReason {
     | 'description'
     | 'heading'
     | 'path'
+    | 'domain'
     | 'identifier'
     | 'fulltext'
+    | 'fallback'
+    | 'related'
     | 'canonical'
     | 'priority'
     | 'explicit';
@@ -75,6 +78,8 @@ export interface RouteResult extends RouteCandidate {
 
 export interface SearchRequest extends RouteRequest {
   limit?: number;
+  /** Include at most two skills when their scores are close. Default 1. */
+  maxSkills?: number;
 }
 
 export interface SearchResult {
@@ -85,14 +90,32 @@ export interface SearchResult {
   section?: string;
   score: number;
   content: string;
+  /** SHA-256 of the complete source document in the indexed snapshot. */
+  hash: string;
   startLine: number;
   endLine: number;
   reasons: SearchReason[];
 }
 
 export interface SearchResponse {
+  snapshot: IndexSnapshot;
   route: RouteResult;
+  /** Additional skills actually included in results, when maxSkills is 2. */
+  relatedRoutes?: RouteResult[];
   results: SearchResult[];
+}
+
+export interface IndexSnapshot {
+  version: 2;
+  generatedAt: string;
+}
+
+export interface FreshnessResult {
+  snapshot: IndexSnapshot;
+  fresh: boolean;
+  added: string[];
+  modified: string[];
+  deleted: string[];
 }
 
 export interface ReadRequest {
@@ -106,6 +129,8 @@ export interface ReadResponse {
   path: string;
   section?: string;
   content: string;
+  /** SHA-256 of the complete current source document, including for section reads. */
+  hash: string;
   startLine: number;
   endLine: number;
 }
@@ -122,10 +147,8 @@ export interface RetrieverOptions {
   rebuild?: boolean;
 }
 
-export interface VaultIndex {
-  version: 1;
+export interface VaultIndex extends IndexSnapshot {
   vaultPath: string;
   configKey: string;
-  generatedAt: string;
   documents: IndexedDocument[];
 }

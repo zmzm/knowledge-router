@@ -25,6 +25,13 @@ try {
     ['transaction around several Prisma writes', 'backend', 'database'],
     ['design pagination query params and response DTO', 'backend', 'api'],
     ['use semantic symbol navigation before editing method', 'common', 'serena'],
+    ['frontend component conventions', 'frontend', 'coding'],
+    ['frontend conventions', 'frontend', 'coding'],
+    [
+      'invalidate React Query enrollment queries after quiz attempt mutation updates progress',
+      'frontend',
+      'react-query',
+    ],
   ];
   const timings = [];
   for (const [query, domain, skill] of cases) {

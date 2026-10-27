@@ -157,12 +157,21 @@ export function indexDocument(
           : 'reference';
   const kind = kinds.has(meta.kind as DocumentKind) ? (meta.kind as DocumentKind) : inferred;
   const triggers = record(meta.triggers);
+  const referenceDirectory = parts.indexOf('references', 2);
+  const skill =
+    kind === 'skill'
+      ? parts.slice(1, -1).join('/') || undefined
+      : referenceDirectory >= 0
+        ? parts.slice(1, referenceDirectory).join('/')
+        : parts.length > 2
+          ? parts[1]
+          : undefined;
   return {
     id: string(meta.id) ?? path,
     path,
     kind,
     domain: string(meta.domain) ?? (parts.length > 1 ? parts[0] : undefined),
-    skill: string(meta.skill) ?? (parts.length > 2 ? parts[1] : undefined),
+    skill: string(meta.skill) ?? skill,
     title: parsed.title ?? string(meta.name) ?? posix.basename(path, '.md'),
     name: string(meta.name),
     description: string(meta.description),

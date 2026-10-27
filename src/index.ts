@@ -1,9 +1,11 @@
 import { readFile, realpath, stat } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { parseMarkdown } from './parser.js';
-import { buildIndex, loadIndex, safePath, saveIndex } from './storage.js';
+import { buildIndex, checkIndexFreshness, loadIndex, safePath, saveIndex } from './storage.js';
 import { SearchEngine } from './search/engine.js';
 import type {
+  FreshnessResult,
   ReadRequest,
   ReadResponse,
   RetrieverOptions,
@@ -11,12 +13,14 @@ import type {
   RouteResult,
   SearchRequest,
   SearchResponse,
+  VaultIndex,
 } from './types.js';
 
 export type * from './types.js';
 
 export class VaultRetriever {
   private engine?: SearchEngine;
+  private index?: VaultIndex;
   private building?: Promise<void>;
   private constructor(
     readonly vaultPath: string,
@@ -51,6 +55,7 @@ export class VaultRetriever {
       : await loadIndex(retriever.cachePath, absolute, copied);
     if (index) {
       retriever.engine = new SearchEngine(index.documents, max);
+      retriever.index = index;
     } else {
       await retriever.build();
     }
@@ -67,6 +72,7 @@ export class VaultRetriever {
       const engine = new SearchEngine(index.documents, this.options.maxReferenceSections ?? 3);
       await saveIndex(this.cachePath, index);
       this.engine = engine;
+      this.index = index;
     })();
     try {
       await this.building;
@@ -79,7 +85,16 @@ export class VaultRetriever {
     return this.engine!.route(request);
   }
   async search(request: SearchRequest): Promise<SearchResponse> {
-    return this.engine!.search(request);
+    const index = this.index!;
+    return {
+      ...this.engine!.search(request),
+      snapshot: { version: index.version, generatedAt: index.generatedAt },
+    };
+  }
+
+  /** Scan current sources and compare hashes with the in-memory snapshot. Does not rebuild. */
+  async checkFreshness(): Promise<FreshnessResult> {
+    return checkIndexFreshness(this.vaultPath, this.options, this.index!);
   }
 
   /** Read current source files, not the cached snapshot. Lines are 1-based and inclusive. */
@@ -95,6 +110,7 @@ export class VaultRetriever {
       throw new Error('Only Markdown files can be read');
     }
     const content = await readFile(absolute, 'utf8');
+    const hash = createHash('sha256').update(content).digest('hex');
     const lines = content.split(/\r?\n/);
     if (request.section !== undefined) {
       const headings = parseMarkdown(content).headings;
@@ -116,6 +132,7 @@ export class VaultRetriever {
         path: request.path,
         section: heading.hierarchy.join(' > ') || heading.title,
         content: heading.content,
+        hash,
         startLine: heading.startLine,
         endLine: heading.endLine,
       };
@@ -133,6 +150,7 @@ export class VaultRetriever {
     }
     return {
       path: request.path,
+      hash,
       content:
         request.startLine === undefined && request.endLine === undefined
           ? content

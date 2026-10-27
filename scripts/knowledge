@@ -1,0 +1,40 @@
+#!/bin/sh
+# Checkout launcher for non-interactive agents; no shell profile is sourced.
+set -eu
+
+launcher_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+cli="$launcher_dir/../dist/cli.js"
+
+fail() {
+  printf '%s\n' "knowledge: $*" >&2
+  exit 1
+}
+
+compatible() {
+  [ -x "$1" ] && "$1" -e 'process.exit(Number(process.versions.node.split(".")[0]) >= 22 ? 0 : 1)' >/dev/null 2>&1
+}
+
+[ -f "$cli" ] || fail 'Missing dist/cli.js. Build this checkout with npm run build first.'
+
+if [ -n "${KNOWLEDGE_NODE:-}" ]; then
+  compatible "$KNOWLEDGE_NODE" || fail 'KNOWLEDGE_NODE must point to an executable Node.js 22+ runtime.'
+  exec "$KNOWLEDGE_NODE" "$cli" "$@"
+fi
+
+runtime=$(command -v node || true)
+if [ -n "$runtime" ] && compatible "$runtime"; then
+  exec "$runtime" "$cli" "$@"
+fi
+
+if [ -n "${NVM_BIN:-}" ] && compatible "$NVM_BIN/node"; then
+  exec "$NVM_BIN/node" "$cli" "$@"
+fi
+
+nvm_dir=${NVM_DIR:-${HOME:-}/.nvm}
+for runtime in "$nvm_dir"/versions/node/*/bin/node; do
+  if compatible "$runtime"; then
+    exec "$runtime" "$cli" "$@"
+  fi
+done
+
+fail 'Node.js 22+ was not found on PATH or in nvm. Set KNOWLEDGE_NODE to its absolute executable path.'

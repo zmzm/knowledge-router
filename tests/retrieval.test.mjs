@@ -166,7 +166,7 @@ test('cache is reusable and ranking is stable across repeated opens', async () =
   const reopened = await VaultRetriever.open(vault);
   assert.deepEqual(await retriever.search(request), await reopened.search(request));
   const data = JSON.parse(await readFile(join(vault, '.knowledge/index.json'), 'utf8'));
-  assert.equal(data.version, 1);
+  assert.equal(data.version, 2);
   assert.ok(data.documents.every((doc) => doc.hash && Number.isFinite(doc.modifiedAt)));
   assert.ok(data.documents.some((doc) => doc.kind === 'domain-index'));
 });
@@ -399,5 +399,119 @@ test('full rebuild handles changes/deletions, new domains, corruption, and symli
     assert.equal((await filtered.route({ query: 'Kotlin' })).skill, undefined);
   } finally {
     await rm(temp, { recursive: true, force: true });
+  }
+});
+
+test('a named domain outweighs generic reference conventions without forcing unrelated routes', () => {
+  const documents = [
+    indexDocument(
+      'frontend/coding/SKILL.md',
+      '---\ndescription: Component conventions.\n---\n# Frontend Coding Skill\n\n## Patterns\nFrontend component conventions.',
+    ),
+    indexDocument(
+      'backend/api/SKILL.md',
+      '---\ndescription: RESTful API design patterns and conventions for endpoints\n---\n# Backend API Design Skill',
+    ),
+    indexDocument(
+      'backend/api/references/rest.md',
+      '---\ntopics: [RESTful conventions]\n---\n# RESTful Conventions\n\n## Rules\nUse consistent naming conventions.',
+    ),
+  ];
+  const engine = new SearchEngine(documents, 3);
+  for (const query of ['frontend conventions', 'frontend component conventions']) {
+    const route = engine.route({ query });
+    assert.equal(route.domain, 'frontend', query);
+    assert.ok(
+      route.reasons.some((reason) => reason.type === 'domain' && reason.value === 'frontend'),
+    );
+  }
+  assert.equal(engine.route({ query: 'frontend nebula astronomy' }).skill, undefined);
+  assert.equal(
+    engine.route({ query: 'frontend conventions', domain: 'backend' }).domain,
+    'backend',
+  );
+  assert.equal(engine.route({ query: 'frontend conventions', skill: 'api' }).skill, 'api');
+  assert.ok(
+    !engine
+      .route({ query: 'frontend backend conventions' })
+      .reasons.some((reason) => reason.type === 'domain'),
+  );
+  const renamed = documents.map((doc) => ({
+    ...doc,
+    domain: doc.domain === 'frontend' ? 'mobile' : doc.domain,
+  }));
+  assert.equal(
+    new SearchEngine(renamed, 3).route({ query: 'mobile component conventions' }).domain,
+    'mobile',
+  );
+});
+
+test('text search includes guidance content and unresolved searches explain how to retry', async () => {
+  const cli = resolve('dist/cli.js');
+  const query = 'invalidate query cache after useMutation';
+  const response = await retriever.search({ query });
+  const { stdout } = await exec(process.execPath, [cli, 'search', query, '--vault', vault]);
+  assert.ok(stdout.includes(response.results[0].content));
+  for (const alternative of response.route.alternatives ?? []) {
+    assert.ok(stdout.includes(`${alternative.domain}/${alternative.skill}`));
+  }
+  const unresolved = await exec(process.execPath, [
+    cli,
+    'search',
+    'nebula zyxwvu',
+    '--vault',
+    vault,
+  ]);
+  assert.match(unresolved.stdout, /--path/);
+  assert.match(unresolved.stdout, /--domain/);
+});
+
+test('checkout launcher finds nvm Node without a shell profile and preserves JSON arguments', async () => {
+  const home = await mkdtemp(join(tmpdir(), 'knowledge-router-runtime-'));
+  try {
+    const bin = join(home, '.nvm/versions/node/v22.0.0/bin');
+    await mkdir(bin, { recursive: true });
+    await symlink(process.execPath, join(bin, 'node'));
+    const blockedBin = join(home, 'bin');
+    await mkdir(blockedBin);
+    await writeFile(join(blockedBin, 'node'), '#!/bin/sh\nexit 1\n', { mode: 0o755 });
+    const env = { HOME: home, PATH: `${blockedBin}:/usr/bin:/bin` };
+    const launcher = resolve('scripts/knowledge');
+    const args = [
+      launcher,
+      'search',
+      'invalidate query cache after useMutation',
+      '--vault',
+      vault,
+      '--json',
+    ];
+    const { stdout } = await exec('/bin/sh', args, { env });
+    assert.equal(JSON.parse(stdout).route.skill, 'react-query');
+    const customNvm = await exec('/bin/sh', args, {
+      env: { ...env, HOME: join(home, 'unused'), NVM_DIR: join(home, '.nvm') },
+    });
+    assert.equal(JSON.parse(customNvm.stdout).route.skill, 'react-query');
+    const configured = await exec('/bin/sh', args, {
+      env: { ...env, KNOWLEDGE_NODE: process.execPath },
+    });
+    assert.equal(JSON.parse(configured.stdout).route.skill, 'react-query');
+    await assert.rejects(
+      exec('/bin/sh', args, { env: { ...env, HOME: join(home, 'unused') } }),
+      (error) => {
+        assert.equal(error.code, 1);
+        assert.match(error.stderr, /Node.js 22\+ was not found/);
+        return true;
+      },
+    );
+    await assert.rejects(
+      exec('/bin/sh', args, { env: { ...env, KNOWLEDGE_NODE: join(home, 'missing') } }),
+      (error) => {
+        assert.equal(error.code, 1);
+        assert.match(error.stderr, /KNOWLEDGE_NODE/);
+        return true;
+      },
+    );
+  } finally {
+    await rm(home, { recursive: true, force: true });
   }
 });

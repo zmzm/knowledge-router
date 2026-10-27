@@ -1,6 +1,6 @@
 import picomatch from 'picomatch';
 import type { IndexedDocument, IndexedHeading, SearchReason } from '../types.js';
-import { containsPhrase, rawTokens, tokenize, type Query } from './tokenizer.js';
+import { containsPhrase, phrase, rawTokens, tokenize, type Query } from './tokenizer.js';
 
 export interface Score {
   score: number;
@@ -12,9 +12,24 @@ export function matchingTerms(text: string, query: Query): string[] {
   return [...new Set(tokenize(text))].filter((term) => query.terms.has(term));
 }
 
+/** Require two distinct query words and coverage of at least 75% of non-stopwords. */
+export function strongTextMatch(matches: string[], query: Query): boolean {
+  const words = new Map<string, string[]>();
+  for (const original of query.originals) {
+    const terms = [...new Set(tokenize(original))].sort();
+    if (terms.length) {
+      words.set(terms.join(' '), terms);
+    }
+  }
+  const matched = new Set(matches);
+  const hits = [...words.values()].filter((terms) => terms.some((term) => matched.has(term)));
+  return hits.length >= 2 && hits.length / words.size >= 0.75;
+}
+
 export function metadataScore(doc: IndexedDocument, query: Query): Score {
   let score = 0;
   const reasons: SearchReason[] = [];
+  const phrases = new Map<string, { score: number; reason: SearchReason }>();
   const curated = (
     values: string[],
     type: SearchReason['type'],
@@ -22,19 +37,38 @@ export function metadataScore(doc: IndexedDocument, query: Query): Score {
     exactOnly = false,
   ) => {
     for (const value of values) {
-      const terms = new Set(tokenize(value));
+      const terms = new Set(tokenize(phrase(value)));
       const hits = [...terms].filter((term) => query.terms.has(term));
-      const exact = containsPhrase(query.text, value);
+      const exact = curatedPhraseMatch(query.text, value);
       if (!terms.size || !hits.length || (exactOnly && !exact)) {
         continue;
       }
-      score += weight * (exact ? 1.5 : (hits.length / terms.size) ** 2);
-      reasons.push({ type, value });
+      const key = syntaxBearing(value) ? value.toLowerCase().replace(/\s+/g, '') : phrase(value);
+      const contribution = weight * (exact ? 1.5 : (hits.length / terms.size) ** 2);
+      const existing = phrases.get(key);
+      if (
+        !existing ||
+        contribution > existing.score ||
+        (contribution === existing.score && value < existing.reason.value)
+      ) {
+        phrases.set(key, { score: contribution, reason: { type, value } });
+      }
     }
   };
   curated(doc.keywords, 'keyword', 15, true);
   curated(doc.topics, 'topic', 12);
   curated(doc.aliases, 'alias', 10, true);
+  // A phrase counts once across curated fields. Each field contributes its strongest three.
+  for (const type of ['keyword', 'topic', 'alias']) {
+    const strongest = [...phrases.entries()]
+      .filter(([, item]) => item.reason.type === type)
+      .sort((a, b) => b[1].score - a[1].score || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
+      .slice(0, 3);
+    for (const [, item] of strongest) {
+      score += item.score;
+      reasons.push(item.reason);
+    }
+  }
   // Score title, name, and structural skill name as one field to avoid triple counting.
   const titles = [
     doc.title,
@@ -109,7 +143,7 @@ export function scoreText(
   if (
     result.score > 0 &&
     doc.canonical &&
-    result.reasons.some((reason) => reason.type === 'topic')
+    doc.topics.some((topic) => matchingTerms(topic, query).length > 0)
   ) {
     result.score += 2;
     result.reasons.push({ type: 'canonical', value: 'true' });
@@ -119,6 +153,20 @@ export function scoreText(
     result.reasons.push({ type: 'priority', value: doc.priority });
   }
   return result;
+}
+
+function syntaxBearing(value: string): boolean {
+  return /[=()[\]{}<>*]|[-.:]$/.test(value.trim());
+}
+
+function curatedPhraseMatch(text: string, value: string): boolean {
+  if (!syntaxBearing(value)) {
+    return containsPhrase(text, value);
+  }
+  const parts = value.match(/[\p{L}\p{N}_$]+|[^\s]/gu) ?? [];
+  const pattern = parts.map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s*');
+  const end = /[\p{L}\p{N}_$]$/u.test(value.trim()) ? '(?![\\p{L}\\p{N}_$])' : '';
+  return !!pattern && new RegExp(`(?<![\\p{L}\\p{N}_$])${pattern}${end}`, 'iu').test(text);
 }
 
 export function pathScore(doc: IndexedDocument, paths: string[]): SearchReason[] {
