@@ -119,7 +119,10 @@ test('explicit constraints, empty results, and invalid inputs', async () => {
   assert.deepEqual((await retriever.search({ query: 'useMutation', limit: 0 })).results, []);
   await assert.rejects(retriever.search({ query: ' ' }), /query/);
   await assert.rejects(retriever.search({ query: 'x', limit: -1 }), /limit/);
-  await assert.rejects(retriever.route({ query: 'x', domain: 'missing' }), /Unknown domain/);
+  await assert.rejects(
+    retriever.route({ query: 'x', domain: 'missing' }),
+    /Unknown domain.*Available domains:.*backend.*common.*frontend.*--skill/,
+  );
   await assert.rejects(
     retriever.route({ query: 'x', skill: 'missing' }),
     /Unknown or excluded skill/,

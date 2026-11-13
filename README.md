@@ -151,7 +151,7 @@ coding/
 
 Domains are inferred from directories containing `INDEX.md` or a nested `SKILL.md`; their names are not hardcoded. All root Markdown files and Markdown files in discovered domains are indexed. Hidden directories, `node_modules`, `templates`, and symlinks are skipped. Recursive discovery includes `.md` regardless of case. Explicit `domains` supports layouts without domain indexes.
 
-YAML frontmatter is optional. Supported fields are `id`, `kind`, `domain`, `skill`, `name`, `description`, `topics`, `aliases`, `keywords`, `triggers.paths`, `triggers.keywords`, `triggers.excludes`, `priority`, `canonical`, and `status`. Missing fields receive safe defaults; unknown fields are ignored. Invalid YAML reports the source path and fails the build, preserving the previous cache.
+YAML frontmatter is optional. Supported fields are `id`, `kind`, `domain`, `skill`, `name`, `description`, `frameworks`, `topics`, `aliases`, `keywords`, `triggers.paths`, `triggers.keywords`, `triggers.excludes`, `priority`, `canonical`, and `status`. Missing fields receive safe defaults; unknown fields are ignored. Invalid YAML reports the source path and fails the build, preserving the previous cache.
 
 Skill identifiers default to their directory relative to the domain: `frontend/react-query/SKILL.md`
 uses `react-query`, while `frontend/forms/vue/SKILL.md` uses `forms/vue`. References under that
@@ -300,3 +300,20 @@ report; a successful reporting command does not mean all queries were answered c
 Source modules: `parser.ts` extracts documents and chunks; `storage.ts` discovers and persists them; `search/` owns normalization, BM25, weighted scoring, and routing; `index.ts` exposes the library and reader; `cli.ts` is the command-line adapter.
 
 Embeddings, LLMs, automatic vault editing, MCP, HTTP, watch mode, and incremental indexing are outside v1.
+
+Framework-specific skills can declare `metadata: { frameworks: [NestJS] }` in frontmatter
+(the top-level `frameworks` field is also accepted). Automatic
+routing retains 40% of their score when neither a declared framework phrase nor a path trigger
+matches. Explicit skill selection bypasses this adjustment. Missing framework metadata
+preserves existing routing; descriptions are not interpreted as scope constraints.
+
+Reference ranking caps inherited document metadata at 18 points (75% of its original
+weight), uses the section heading hierarchy, and reduces introductory/navigation section
+scores. Results offer the best qualifying section from each document before returning
+additional sections from the same document.
+
+Routing ignores generic description words such as “user,” “data,” and “rules” as scope
+evidence, while preserving them in curated phrases and searchable content. Structural
+headings such as “Rules” and “When to use” do not boost skill routes. All-uppercase code
+identifiers require matching case, so prose “rules” does not receive a `RULES` identifier
+bonus; camelCase identifier lookup remains case-insensitive.

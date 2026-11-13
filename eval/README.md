@@ -84,3 +84,37 @@ the mixed NestJS/Prisma request routes to backend coding. Remaining issues inclu
 terms forcing routes for product-only questions, low recall for some specific references,
 and mixed tasks whose second relevant skill falls outside the expansion margin. Keep these
 cases visible when changing weights or coverage.
+
+## SnowRunner Companion report
+
+`snowrunner.json` preserves the two exact searches supplied in the November 13, 2026
+agent report. Labels are agent-proposed and not user-reviewed. Replay with:
+
+```bash
+npm run eval -- --dataset eval/snowrunner.json --vault /path/to/coding --k 4
+```
+
+The `automatic` and `explicit` tags separate discovery from forced skill selection.
+Use `--k 4` to reproduce the reported budget; the evaluator's default is 5 and overrides
+per-case limits. This dataset has no acceptance gate. Document recall does not measure
+whether a returned section contains useful guidance; optional `expected.sections` labels measure exact `{path, section}` matches using the
+full heading hierarchy. `sectionRecallAtK` averages recall over section-labeled cases;
+unlabeled cases are excluded. Duplicate labels count once. Labels are validated against
+current vault section reads before evaluation. Navigation in the same document does not
+satisfy a substantive section label. Ranking regression tests also cover section selection.
+
+## Latest five local runs
+
+`latest-five.json` labels 11 technical requests from the 19 searches in the user-supplied
+review. Requests preserve exact query text, constraints, limits and log provenance. Labels
+are agent-proposed against existing guidance, not user-reviewed. Backend authorization and
+URL-state cases also require substantive sections. Run with:
+
+```bash
+npm run eval -- --dataset eval/latest-five.json --vault /path/to/coding
+```
+
+Product-policy queries, the invalid domain, and forced frontend auth selection remain in
+the unlabeled replay report. They are not assigned unsupported correctness labels. These
+observations guided the metadata changes and therefore are regression cases, not an
+independent generalization benchmark. The full replay retains all 19 searches.

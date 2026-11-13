@@ -175,6 +175,7 @@ export function indexDocument(
     title: parsed.title ?? string(meta.name) ?? posix.basename(path, '.md'),
     name: string(meta.name),
     description: string(meta.description),
+    frameworks: strings(record(meta.metadata).frameworks ?? meta.frameworks),
     topics: strings(meta.topics),
     aliases: strings(meta.aliases),
     keywords: [...strings(meta.keywords), ...strings(triggers.keywords)],

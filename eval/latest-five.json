@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "name": "Latest five runs: technical routing cases",
+  "labeling": "Exact observed requests from user report. Agent-proposed labels based on existing guidance; not user-reviewed. Product-policy questions, invalid constraints and forced auth selection remain in the unlabeled replay rather than being assigned unsupported relevance labels.",
+  "cases": [
+    {
+      "id": "latest-five-03",
+      "source": {
+        "file": "20261104_030012_e400f889074c4fbb88af7a67d297a6ad_f11-d4.log",
+        "line": 116
+      },
+      "tags": ["observed", "technical", "backend/testing"],
+      "request": {
+        "query": "NestJS backend feature module service controller testing conventions",
+        "limit": 4
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "testing"
+          }
+        ],
+        "documents": ["backend/testing/SKILL.md"]
+      }
+    },
+    {
+      "id": "latest-five-04",
+      "source": {
+        "file": "20261104_030012_e400f889074c4fbb88af7a67d297a6ad_f11-d4.log",
+        "line": 120
+      },
+      "tags": ["observed", "technical", "frontend/testing"],
+      "request": {
+        "query": "React frontend component hook testing react-query msw conventions",
+        "limit": 3
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "testing"
+          }
+        ],
+        "documents": ["frontend/testing/SKILL.md"]
+      }
+    },
+    {
+      "id": "latest-five-08",
+      "source": {
+        "file": "20261103_030009_85d9d8770aed46b38a57f5edc276d31a_f11-d3.log",
+        "line": 129
+      },
+      "tags": ["observed", "technical", "backend/security"],
+      "request": {
+        "query": "admin role authorization guard protected endpoints",
+        "limit": 5
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "security"
+          }
+        ],
+        "documents": ["backend/security/SKILL.md"],
+        "sections": [
+          {
+            "path": "backend/security/references/owasp-protection.md",
+            "section": "OWASP Top 10 Protection > OWASP Top 10 Patterns > 1. Broken Access Control"
+          }
+        ]
+      }
+    },
+    {
+      "id": "latest-five-10",
+      "source": {
+        "file": "20261103_030009_85d9d8770aed46b38a57f5edc276d31a_f11-d3.log",
+        "line": 137
+      },
+      "tags": ["observed", "technical", "frontend/react-query"],
+      "request": {
+        "query": "react-query mutations query invalidation cache",
+        "limit": 5
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "react-query"
+          }
+        ],
+        "documents": ["frontend/react-query/SKILL.md"]
+      }
+    },
+    {
+      "id": "latest-five-12",
+      "source": {
+        "file": "20261102_030001_47fbf26b4dfc4546a2fb04d5327c47c2_f11-d2.log",
+        "line": 164
+      },
+      "tags": ["observed", "technical", "frontend/routing"],
+      "request": {
+        "query": "URL-backed search filter state query params react router",
+        "limit": 5
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "routing"
+          }
+        ],
+        "documents": ["frontend/routing/SKILL.md"],
+        "sections": [
+          {
+            "path": "frontend/routing/references/navigation.md",
+            "section": "Navigation Patterns > Notes > Query Parameters"
+          }
+        ]
+      }
+    },
+    {
+      "id": "latest-five-13",
+      "source": {
+        "file": "20261102_030001_47fbf26b4dfc4546a2fb04d5327c47c2_f11-d2.log",
+        "line": 167
+      },
+      "tags": ["observed", "technical", "backend/api"],
+      "request": {
+        "query": "filtering sorting pagination API query validation backend",
+        "limit": 5
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "api"
+          }
+        ],
+        "documents": ["backend/api/SKILL.md"]
+      }
+    },
+    {
+      "id": "latest-five-15",
+      "source": {
+        "file": "20261101_030001_920045a5c41642ec99b9f60fe18ec4dc_f11-d1.log",
+        "line": 11
+      },
+      "tags": ["observed", "technical", "backend/database"],
+      "request": {
+        "query": "PostgreSQL full-text search indexed backend",
+        "limit": 5
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "database"
+          }
+        ],
+        "documents": ["backend/database/SKILL.md"]
+      }
+    },
+    {
+      "id": "latest-five-16",
+      "source": {
+        "file": "20261101_030001_920045a5c41642ec99b9f60fe18ec4dc_f11-d1.log",
+        "line": 14
+      },
+      "tags": ["observed", "technical", "common/engineering"],
+      "request": {
+        "query": "contracts and validation schema compatibility shared principles",
+        "limit": 3,
+        "paths": ["backend/database/SKILL.md"]
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "common",
+            "skill": "engineering"
+          }
+        ],
+        "documents": ["common/engineering/SKILL.md"]
+      }
+    },
+    {
+      "id": "latest-five-17",
+      "source": {
+        "file": "20261101_030001_920045a5c41642ec99b9f60fe18ec4dc_f11-d1.log",
+        "line": 147
+      },
+      "tags": ["observed", "technical", "backend/database"],
+      "request": {
+        "query": "postgresql search indexing trigram migration constraint",
+        "limit": 5
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "backend",
+            "skill": "database"
+          }
+        ],
+        "documents": ["backend/database/SKILL.md"]
+      }
+    },
+    {
+      "id": "latest-five-18",
+      "source": {
+        "file": "20261002_080340_f10-d4.log",
+        "line": 127
+      },
+      "tags": ["observed", "technical", "frontend/accessibility"],
+      "request": {
+        "query": "accessibility requirements new page ARIA jest-axe",
+        "limit": 5
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "accessibility"
+          }
+        ],
+        "documents": ["frontend/accessibility/SKILL.md"]
+      }
+    },
+    {
+      "id": "latest-five-19",
+      "source": {
+        "file": "20261002_080340_f10-d4.log",
+        "line": 128
+      },
+      "tags": ["observed", "technical", "frontend/testing"],
+      "request": {
+        "query": "frontend component testing standards react query feature pages",
+        "limit": 5
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "frontend",
+            "skill": "testing"
+          }
+        ],
+        "documents": ["frontend/testing/SKILL.md"]
+      }
+    }
+  ]
+}

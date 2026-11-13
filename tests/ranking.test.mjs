@@ -235,3 +235,96 @@ test('multi-skill limits validate inputs and never exceed document or section bu
     assert.equal(response.relatedRoutes?.length ?? 0, limit >= 2 ? 1 : 0);
   }
 });
+
+test('declared framework scope reduces generic routes but preserves framework and explicit requests', () => {
+  const generic = indexDocument(
+    'common/engineering/SKILL.md',
+    '---\nkeywords: [refactor, importer]\n---\n# Engineering',
+  );
+  const scoped = indexDocument(
+    'backend/refactor/SKILL.md',
+    '---\nmetadata:\n  frameworks: [NestJS]\nkeywords: [refactor, importer]\n---\n# Refactor',
+  );
+  assert.deepEqual(scoped.frameworks, ['NestJS']);
+  const engine = new SearchEngine([generic, scoped], 3);
+  assert.equal(engine.route({ query: 'refactor TypeScript importer' }).domain, 'common');
+  assert.equal(engine.route({ query: 'refactor NestJS service' }).domain, 'backend');
+  assert.equal(engine.route({ query: 'refactor importer', skill: 'refactor' }).domain, 'backend');
+  const pathScoped = { ...scoped, pathTriggers: ['src/services/**'] };
+  assert.equal(
+    new SearchEngine([generic, pathScoped], 3).route({
+      query: 'refactor',
+      paths: ['src/services/a.ts'],
+    }).domain,
+    'backend',
+  );
+});
+
+test('reference budget favors substantive guidance from distinct documents over navigation', () => {
+  const docs = [
+    indexDocument('common/engineering/SKILL.md', '---\nkeywords: [validation]\n---\n# Engineering'),
+    indexDocument(
+      'common/engineering/references/boundaries.md',
+      '---\ntopics: [validation, module boundaries]\n---\n# Module boundaries\nCanonical validation guidance.\n## Related guidance\nSee validation links.\n## Preserve boundaries\nValidate inputs at module boundaries before performing external effects.\n## Preserve outcomes\nValidation failures must preserve caller-visible outcomes.',
+    ),
+    indexDocument(
+      'common/engineering/references/contracts.md',
+      '# Contracts\n## Validate before effects\nValidate configuration inputs before loading files or performing external effects.',
+    ),
+  ];
+  const response = new SearchEngine(docs, 3).search({
+    query: 'validation module boundaries inputs external effects',
+    skill: 'engineering',
+    limit: 3,
+  });
+  assert.equal(response.results.length, 3);
+  assert.equal(new Set(response.results.slice(1).map((item) => item.path)).size, 2);
+  assert.ok(
+    response.results
+      .slice(1)
+      .every((item) => !/Related guidance|Module boundaries$/.test(item.section)),
+  );
+});
+
+test('boilerplate and generic descriptions do not establish a product-policy route', () => {
+  const guide = indexDocument(
+    'frontend/errors/SKILL.md',
+    `---
+description: Patterns and conventions for user feedback on errors.
+---
+# Errors
+## Rules
+Follow [RULES](../../RULES.md).
+## When to use
+Handle user errors with clear feedback.`,
+  );
+  const engine = new SearchEngine([guide], 3);
+  for (const query of [
+    'rule-based recommendations personalization from user activity and progress data',
+    'recommendation feature product requirements learning paths course progress domain rules privacy user data',
+  ]) {
+    assert.equal(engine.route({ query }).skill, undefined);
+  }
+  assert.equal(engine.route({ query: 'user feedback on errors' }).skill, 'errors');
+  assert.equal(engine.route({ query: 'product rules', skill: 'errors' }).skill, 'errors');
+});
+
+test('uppercase code identifiers require matching case, while camelCase identifiers retain tolerant lookup', () => {
+  const guide = indexDocument('systems/alpha/SKILL.md', '# Alpha\n\n`RULES` `invalidateQueries`');
+  const engine = new SearchEngine([guide], 3);
+  assert.ok(
+    !engine
+      .route({ query: 'rules', skill: 'alpha' })
+      .reasons.some((reason) => reason.type === 'identifier'),
+  );
+  assert.ok(
+    engine
+      .route({ query: 'RULES', skill: 'alpha' })
+      .reasons.some((reason) => reason.type === 'identifier'),
+  );
+  assert.ok(
+    engine
+      .route({ query: 'invalidatequeries', skill: 'alpha' })
+      .reasons.some((reason) => reason.type === 'identifier'),
+  );
+});

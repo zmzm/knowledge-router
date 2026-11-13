@@ -141,6 +141,31 @@ already includes routing, so a preceding `route` call is usually unnecessary.
   --json
 ```
 
+## Keep decisions, layers, and knowledge sources separate
+
+Use focused queries for backend endpoint authorization, frontend route protection,
+URL serialization/history, server-cache behavior, and component testing. Adjacent guidance
+can help, but does not answer the original decision merely because it shares words.
+For mixed work, make separate searches when necessary and inspect each skill's boundaries.
+
+Domain and skill names come from the selected vault. For the standard coding vault,
+`auth` is a frontend skill, not a domain; backend authorization belongs to `backend/security`.
+An unknown-domain error lists available domains. An explicit skill selection still requires
+reading its scope; confidence 1 records selection, not relevance.
+
+`--path` is a project-file hint, not a hard filter or a vault-document selector. Use `read`
+for a known vault document, and `--domain`/`--skill` for routing constraints.
+
+Project-specific product rules require a configured project corpus. The router searches only
+the vault passed to the request; it does not automatically combine the coding vault with an
+experimental project index. Query the project's supplied vault explicitly, check its date,
+and verify plans or execution claims against current sources before treating them as facts.
+
+When retrieval fails, report “not found via these queries,” rather than claiming the vault
+contains no guidance. Keep three kinds of evidence separate: the exact source passage read,
+the implementation decision it informed, and the verification that the decision was applied.
+A plan or passing quality gate alone does not establish implementation compliance.
+
 ## Read additional guidance precisely
 
 Use `read` for an explicitly referenced document, a missing section, or fresh source content.

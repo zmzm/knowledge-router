@@ -1,0 +1,4374 @@
+{
+  "date": "2026-11-13",
+  "scope": "Local replay of exact user-reported queries; labels agent-proposed, not user-reviewed. Before is the implementation from the previous turn with original vault metadata. After includes three scoped vault skills and revised ranking.",
+  "vault": "/home/pentagon-admin/Documents/apps/obsidian-vaults/coding",
+  "vaultChanges": {
+    "backend/refactor/SKILL.md": {
+      "metadata.frameworks": ["NestJS"]
+    },
+    "backend/coding/SKILL.md": {
+      "metadata.frameworks": ["NestJS"]
+    },
+    "frontend/error-handling/SKILL.md": {
+      "metadata.frameworks": ["React"]
+    }
+  },
+  "before": {
+    "snow": {
+      "dataset": "SnowRunner Companion observed queries",
+      "k": 4,
+      "confidenceThreshold": 0.5,
+      "maxSkills": "per-case",
+      "metrics": {
+        "cases": 2,
+        "routeAccuracy": 0.5,
+        "positiveRouteAccuracy": 0.5,
+        "abstentionAccuracy": null,
+        "routeRecallAt3": 0.5,
+        "documentRecallAtK": 0.5,
+        "confidentRoutes": 0,
+        "confidentErrors": 0,
+        "confidentErrorRate": null
+      },
+      "byTag": {
+        "automatic": {
+          "cases": 1,
+          "routeAccuracy": 0,
+          "positiveRouteAccuracy": 0,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 0,
+          "documentRecallAtK": 0,
+          "confidentRoutes": 0,
+          "confidentErrors": 0,
+          "confidentErrorRate": null
+        },
+        "explicit": {
+          "cases": 1,
+          "routeAccuracy": 1,
+          "positiveRouteAccuracy": 1,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 1,
+          "documentRecallAtK": 1,
+          "confidentRoutes": 0,
+          "confidentErrors": 0,
+          "confidentErrorRate": null
+        },
+        "snowrunner": {
+          "cases": 2,
+          "routeAccuracy": 0.5,
+          "positiveRouteAccuracy": 0.5,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 0.5,
+          "documentRecallAtK": 0.5,
+          "confidentRoutes": 0,
+          "confidentErrors": 0,
+          "confidentErrorRate": null
+        }
+      },
+      "cases": [
+        {
+          "id": "snowrunner-01",
+          "query": "refactor TypeScript data import normalization deep modules information hiding parsing validation errors",
+          "tags": ["snowrunner", "automatic"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "common",
+                "skill": "engineering"
+              }
+            ],
+            "documents": [
+              "common/engineering/SKILL.md",
+              "common/engineering/references/readability-and-boundaries.md",
+              "common/engineering/references/contracts-and-validation.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "refactor",
+              "confidence": 0.483,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "refactor"
+                },
+                {
+                  "type": "description",
+                  "value": "type"
+                },
+                {
+                  "type": "heading",
+                  "value": "refactor"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "type, modules, module"
+                },
+                {
+                  "type": "topic",
+                  "value": "refactor (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "coding",
+                  "confidence": 0.366
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "error-handling",
+                  "confidence": 0.318
+                },
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.287
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/refactor/SKILL.md",
+              "backend/refactor/references/anti-patterns.md",
+              "backend/refactor/references/safe-refactorings.md",
+              "backend/refactor/references/permission-required.md"
+            ]
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": 0,
+          "missingDocuments": [
+            "common/engineering/SKILL.md",
+            "common/engineering/references/readability-and-boundaries.md",
+            "common/engineering/references/contracts-and-validation.md"
+          ],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "snowrunner-02",
+          "query": "module cohesion information hiding refactoring readability boundaries verification TypeScript",
+          "tags": ["snowrunner", "explicit"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "common",
+                "skill": "engineering"
+              }
+            ],
+            "documents": [
+              "common/engineering/SKILL.md",
+              "common/engineering/references/readability-and-boundaries.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "common",
+              "skill": "engineering",
+              "confidence": 1,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "typescript, type, script, module, boundaries, boundary, verification"
+                },
+                {
+                  "type": "heading",
+                  "value": "boundary"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "module, refactoring, readability, boundaries, boundary, verification, script"
+                },
+                {
+                  "type": "topic",
+                  "value": "readability (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "module boundaries (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Readability and Boundaries (reference metadata)"
+                },
+                {
+                  "type": "explicit",
+                  "value": "skill: engineering"
+                },
+                {
+                  "type": "explicit",
+                  "value": "domain: common"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "common/engineering/SKILL.md",
+              "common/engineering/references/readability-and-boundaries.md",
+              "common/engineering/references/verification-and-change-safety.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "missingDocuments": [],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        }
+      ]
+    },
+    "flow": {
+      "dataset": "Flow Forge observed queries",
+      "k": 5,
+      "confidenceThreshold": 0.5,
+      "maxSkills": "per-case",
+      "metrics": {
+        "cases": 29,
+        "routeAccuracy": 0.7241379310344828,
+        "positiveRouteAccuracy": 0.7894736842105263,
+        "abstentionAccuracy": 0.6,
+        "routeRecallAt3": 0.7931034482758621,
+        "documentRecallAtK": 0.4912280701754386,
+        "confidentRoutes": 5,
+        "confidentErrors": 1,
+        "confidentErrorRate": 0.2
+      },
+      "byTag": {
+        "explicit": {
+          "cases": 1,
+          "routeAccuracy": 1,
+          "positiveRouteAccuracy": 1,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 1,
+          "documentRecallAtK": 1,
+          "confidentRoutes": 0,
+          "confidentErrors": 0,
+          "confidentErrorRate": null
+        },
+        "flowforge": {
+          "cases": 29,
+          "routeAccuracy": 0.7241379310344828,
+          "positiveRouteAccuracy": 0.7894736842105263,
+          "abstentionAccuracy": 0.6,
+          "routeRecallAt3": 0.7931034482758621,
+          "documentRecallAtK": 0.4912280701754386,
+          "confidentRoutes": 5,
+          "confidentErrors": 1,
+          "confidentErrorRate": 0.2
+        },
+        "mixed": {
+          "cases": 9,
+          "routeAccuracy": 1,
+          "positiveRouteAccuracy": 1,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 1,
+          "documentRecallAtK": 0.48148148148148145,
+          "confidentRoutes": 2,
+          "confidentErrors": 0,
+          "confidentErrorRate": 0
+        },
+        "negative": {
+          "cases": 10,
+          "routeAccuracy": 0.6,
+          "positiveRouteAccuracy": null,
+          "abstentionAccuracy": 0.6,
+          "routeRecallAt3": 0.6,
+          "documentRecallAtK": null,
+          "confidentRoutes": 1,
+          "confidentErrors": 1,
+          "confidentErrorRate": 1
+        },
+        "positive": {
+          "cases": 19,
+          "routeAccuracy": 0.7894736842105263,
+          "positiveRouteAccuracy": 0.7894736842105263,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 0.8947368421052632,
+          "documentRecallAtK": 0.4912280701754386,
+          "confidentRoutes": 4,
+          "confidentErrors": 0,
+          "confidentErrorRate": 0
+        }
+      },
+      "cases": [
+        {
+          "id": "flowforge-01",
+          "query": "course content model with video reading assignment quiz and completion rules data model",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "database"
+              }
+            ],
+            "documents": ["backend/database/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "auth",
+              "confidence": 0.291,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "content"
+                },
+                {
+                  "type": "heading",
+                  "value": "rules, rule"
+                },
+                {
+                  "type": "identifier",
+                  "value": "RULES"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "rules, rule, data"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "database",
+                  "confidence": 0.257
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "hook",
+                  "confidence": 0.257
+                },
+                {
+                  "domain": "common",
+                  "skill": "serena",
+                  "confidence": 0.238
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/auth/SKILL.md",
+              "frontend/auth/references/use-auth.md",
+              "frontend/auth/references/clerk-components.md"
+            ]
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0,
+          "missingDocuments": ["backend/database/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-02",
+          "query": "course content model validation and completion rules constraints",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "security",
+              "confidence": 0.304,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "validation"
+                },
+                {
+                  "type": "heading",
+                  "value": "rules, rule"
+                },
+                {
+                  "type": "identifier",
+                  "value": "RULES"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "validation, rules, rule"
+                },
+                {
+                  "type": "topic",
+                  "value": "input validation (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Input Validation (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "auth",
+                  "confidence": 0.272
+                },
+                {
+                  "domain": "backend",
+                  "skill": "debug",
+                  "confidence": 0.262
+                },
+                {
+                  "domain": "backend",
+                  "skill": "coding",
+                  "confidence": 0.252
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/security/SKILL.md",
+              "backend/security/references/http-headers.md",
+              "backend/security/references/input-validation.md",
+              "backend/security/references/environment-config.md"
+            ]
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-03",
+          "query": "add quiz knowledge check with scoring integrated into course progress tracking",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-04",
+          "query": "course progress completion model assignment versus quiz in project-x app",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "ui",
+              "confidence": 0.313,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "project-x, app"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "project-x, app"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": ["frontend/ui/SKILL.md"]
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-05",
+          "query": "invalidate React Query enrollment queries after quiz attempt mutation updates progress",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "react-query"
+              }
+            ],
+            "documents": [
+              "frontend/react-query/SKILL.md",
+              "frontend/react-query/references/cache-invalidation.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "react-query",
+              "confidence": 0.662,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "react-query"
+                },
+                {
+                  "type": "description",
+                  "value": "react, query, mutation"
+                },
+                {
+                  "type": "heading",
+                  "value": "react, query"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "react, query, queries, mutation, updates, update"
+                },
+                {
+                  "type": "topic",
+                  "value": "react-query (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "mutations (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "useMutation for Modifying Data (reference metadata)"
+                },
+                {
+                  "type": "path",
+                  "value": "**/*.hook.ts"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "database",
+                  "confidence": 0.316
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/react-query/SKILL.md",
+              "frontend/react-query/references/custom-hooks.md",
+              "frontend/react-query/references/query-options.md",
+              "frontend/react-query/references/advanced-patterns.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "missingDocuments": ["frontend/react-query/references/cache-invalidation.md"],
+          "negative": false,
+          "confident": true,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-06",
+          "query": "mentor admin course authoring permissions draft state modules metadata",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "security"
+              },
+              {
+                "domain": "backend",
+                "skill": "coding"
+              }
+            ],
+            "documents": ["backend/security/SKILL.md", "backend/coding/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.461,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "modules, module"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "modules, module"
+                },
+                {
+                  "type": "topic",
+                  "value": "modules (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Modules (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.187
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/modules.md",
+              "backend/coding/references/controllers.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "missingDocuments": ["backend/security/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-07",
+          "query": "course authoring",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-08",
+          "query": "role-based access control draft state content authoring constraints",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/security/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": []
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": 0,
+          "missingDocuments": ["backend/security/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-09",
+          "query": "course authoring MVP objectives draft status transitions frontend feature conventions",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "coding"
+              }
+            ],
+            "documents": [
+              "frontend/coding/SKILL.md",
+              "frontend/coding/references/component-structure.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "coding",
+              "confidence": 0.38,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Frontend Coding Skill"
+                },
+                {
+                  "type": "heading",
+                  "value": "frontend"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "frontend, conventions, convention"
+                },
+                {
+                  "type": "title",
+                  "value": "Hook File Conventions (reference metadata)"
+                },
+                {
+                  "type": "domain",
+                  "value": "frontend"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "api",
+                  "confidence": 0.223
+                },
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.215
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": ["frontend/coding/SKILL.md"]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "missingDocuments": ["frontend/coding/references/component-structure.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-10",
+          "query": "course",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-11",
+          "query": "frontend component conventions",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "coding"
+              }
+            ],
+            "documents": [
+              "frontend/coding/SKILL.md",
+              "frontend/coding/references/component-structure.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "coding",
+              "confidence": 0.327,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Frontend Coding Skill"
+                },
+                {
+                  "type": "heading",
+                  "value": "frontend"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "frontend, component, conventions, convention"
+                },
+                {
+                  "type": "topic",
+                  "value": "component structure (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Component Structure (reference metadata)"
+                },
+                {
+                  "type": "domain",
+                  "value": "frontend"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.321
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "ui",
+                  "confidence": 0.32
+                },
+                {
+                  "domain": "backend",
+                  "skill": "api",
+                  "confidence": 0.219
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/coding/SKILL.md",
+              "frontend/coding/references/component-structure.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "missingDocuments": [],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-12",
+          "query": "course publishing moderation workflow draft published archived admin approval safeguards domain rules",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "domain": "common",
+              "skill": "task-workflow",
+              "confidence": 0.366,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Task Workflow"
+                },
+                {
+                  "type": "description",
+                  "value": "workflow"
+                },
+                {
+                  "type": "heading",
+                  "value": "workflow, rules, rule"
+                },
+                {
+                  "type": "identifier",
+                  "value": "RULES"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "workflow, domain, rules, rule"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "common",
+                  "skill": "serena",
+                  "confidence": 0.262
+                },
+                {
+                  "domain": "common",
+                  "skill": "skill-creator",
+                  "confidence": 0.239
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "i18n",
+                  "confidence": 0.236
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": ["common/task-workflow/SKILL.md"]
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-13",
+          "query": "course moderation publishing workflow admin approval state machine constraints",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "common",
+                "skill": "engineering"
+              }
+            ],
+            "documents": [
+              "common/engineering/SKILL.md",
+              "common/engineering/references/state-and-recovery.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "common",
+              "skill": "task-workflow",
+              "confidence": 0.256,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Task Workflow"
+                },
+                {
+                  "type": "description",
+                  "value": "workflow"
+                },
+                {
+                  "type": "heading",
+                  "value": "workflow"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "workflow"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.163
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": ["common/task-workflow/SKILL.md"]
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0,
+          "missingDocuments": [
+            "common/engineering/SKILL.md",
+            "common/engineering/references/state-and-recovery.md"
+          ],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-14",
+          "query": "backend NestJS state transitions enum validation guard conventions",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              },
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/security/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "security",
+              "confidence": 0.39,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Backend Security Skill"
+                },
+                {
+                  "type": "description",
+                  "value": "nestjs, nest, js, validation, guard"
+                },
+                {
+                  "type": "heading",
+                  "value": "backend"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, nest, js, validation, guard"
+                },
+                {
+                  "type": "topic",
+                  "value": "input validation (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Input Validation (reference metadata)"
+                },
+                {
+                  "type": "domain",
+                  "value": "backend"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "api",
+                  "confidence": 0.383
+                },
+                {
+                  "domain": "backend",
+                  "skill": "coding",
+                  "confidence": 0.38
+                },
+                {
+                  "domain": "backend",
+                  "skill": "debug",
+                  "confidence": 0.372
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/security/SKILL.md",
+              "backend/security/references/input-validation.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "missingDocuments": ["backend/coding/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-15",
+          "query": "learning path domain ordered modules validation admin mentor permissions",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              },
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/security/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.48,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "modules, module, validation"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "modules, module, validation"
+                },
+                {
+                  "type": "topic",
+                  "value": "modules (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Modules (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.19
+                },
+                {
+                  "domain": "backend",
+                  "skill": "security",
+                  "confidence": 0.167
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/modules.md",
+              "backend/coding/references/controllers.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "missingDocuments": ["backend/security/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-16",
+          "query": "role based access control admin mentor permissions who can create content",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/security/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": []
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": 0,
+          "missingDocuments": ["backend/security/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-17",
+          "query": "NestJS module structure DTO validation service",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              }
+            ],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/modules.md",
+              "backend/coding/references/dtos.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.299,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "nestjs, nest, js, service, module, validation"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, nest, js, module, structure, dto, validation, service"
+                },
+                {
+                  "type": "topic",
+                  "value": "modules (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Modules (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "versioning",
+                  "confidence": 0.277
+                },
+                {
+                  "domain": "backend",
+                  "skill": "security",
+                  "confidence": 0.263
+                },
+                {
+                  "domain": "backend",
+                  "skill": "testing",
+                  "confidence": 0.259
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/dtos.md",
+              "backend/coding/references/controllers.md",
+              "backend/coding/references/modules.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "missingDocuments": [],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-18",
+          "query": "react form validation react-hook-form zod mutations",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "hook"
+              },
+              {
+                "domain": "frontend",
+                "skill": "ui"
+              }
+            ],
+            "documents": [
+              "frontend/hook/references/form-state.md",
+              "frontend/ui/references/forms.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "hook",
+              "confidence": 0.498,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "hook"
+                },
+                {
+                  "type": "description",
+                  "value": "hook"
+                },
+                {
+                  "type": "heading",
+                  "value": "hook"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "react, form, hook, mutation"
+                },
+                {
+                  "type": "topic",
+                  "value": "hook (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "form state (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Hooks for Form State (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "react-query",
+                  "confidence": 0.389
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.282
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "coding",
+                  "confidence": 0.179
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/hook/SKILL.md",
+              "frontend/hook/references/composition.md",
+              "frontend/hook/references/data-fetching.md",
+              "frontend/hook/references/core-principles.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0,
+          "missingDocuments": [
+            "frontend/hook/references/form-state.md",
+            "frontend/ui/references/forms.md"
+          ],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-19",
+          "query": "NestJS service transactional Prisma module writes with DTO validation and role ownership",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              },
+              {
+                "domain": "backend",
+                "skill": "database"
+              },
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/database/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.312,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "nestjs, nest, js, service, module, validation"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, nest, js, service, prisma, module, dto, validation"
+                },
+                {
+                  "type": "topic",
+                  "value": "modules (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Modules (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "security",
+                  "confidence": 0.263
+                },
+                {
+                  "domain": "backend",
+                  "skill": "debug",
+                  "confidence": 0.261
+                },
+                {
+                  "domain": "backend",
+                  "skill": "testing",
+                  "confidence": 0.261
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/controllers.md",
+              "backend/coding/references/dtos.md",
+              "backend/coding/references/error-handling.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "missingDocuments": ["backend/database/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-20",
+          "query": "transactional Prisma writes in NestJS service with class-validator DTOs and roles guard",
+          "tags": ["flowforge", "positive", "explicit"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/coding/references/dtos.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 1,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "nestjs, nest, js, service, dtos, dt, os"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "prisma, nestjs, nest, js, service, class, validator, dtos, dt, os, guard"
+                },
+                {
+                  "type": "topic",
+                  "value": "dtos (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "DTOs (Data Transfer Objects) (reference metadata)"
+                },
+                {
+                  "type": "explicit",
+                  "value": "skill: coding"
+                },
+                {
+                  "type": "explicit",
+                  "value": "domain: backend"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/dtos.md",
+              "backend/coding/references/controllers.md",
+              "backend/coding/references/error-handling.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "missingDocuments": [],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-21",
+          "query": "learner enrollment in learning path, progress tracking completion state, dashboard visibility",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-22",
+          "query": "project-x paths modules enrollment progress product rules",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.505,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "modules, module"
+                },
+                {
+                  "type": "heading",
+                  "value": "rules, rule"
+                },
+                {
+                  "type": "identifier",
+                  "value": "RULES"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "modules, module, rules, rule"
+                },
+                {
+                  "type": "topic",
+                  "value": "modules (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Modules (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "ui",
+                  "confidence": 0.274
+                },
+                {
+                  "domain": "backend",
+                  "skill": "testing",
+                  "confidence": 0.274
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.268
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/modules.md",
+              "backend/coding/references/controllers.md",
+              "backend/coding/references/dtos.md"
+            ]
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": true,
+          "confidentError": true
+        },
+        {
+          "id": "flowforge-23",
+          "query": "NestJS enrollment progress module structure DTO validation testing",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              },
+              {
+                "domain": "backend",
+                "skill": "testing"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/testing/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "testing",
+              "confidence": 0.48,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "testing"
+                },
+                {
+                  "type": "description",
+                  "value": "testing, nestjs, nest, js, module"
+                },
+                {
+                  "type": "heading",
+                  "value": "testing"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, nest, js, testing"
+                },
+                {
+                  "type": "topic",
+                  "value": "testing (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.423
+                },
+                {
+                  "domain": "backend",
+                  "skill": "versioning",
+                  "confidence": 0.277
+                },
+                {
+                  "domain": "backend",
+                  "skill": "coding",
+                  "confidence": 0.272
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/testing/SKILL.md",
+              "backend/testing/references/test-layer-patterns.md",
+              "backend/testing/references/utility-tests.md",
+              "backend/testing/references/mocking-patterns.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "missingDocuments": ["backend/coding/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-24",
+          "query": "learning path milestones mentor checkpoints session prompts",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-25",
+          "query": "learning path milestones checkpoint states mentor session prompt",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-26",
+          "query": "nestjs module api contract prisma migration conventions",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "api"
+              },
+              {
+                "domain": "backend",
+                "skill": "database"
+              },
+              {
+                "domain": "backend",
+                "skill": "coding"
+              }
+            ],
+            "documents": ["backend/api/SKILL.md", "backend/database/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "api",
+              "confidence": 0.623,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "api"
+                },
+                {
+                  "type": "description",
+                  "value": "api, conventions, convention, nestjs"
+                },
+                {
+                  "type": "heading",
+                  "value": "api"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, api, contract, conventions, convention"
+                },
+                {
+                  "type": "topic",
+                  "value": "api (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "restful conventions (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "RESTful Conventions (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "coding",
+                  "confidence": 0.254
+                },
+                {
+                  "domain": "backend",
+                  "skill": "versioning",
+                  "confidence": 0.249
+                },
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.248
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/api/SKILL.md",
+              "backend/api/references/error-responses.md",
+              "backend/api/references/restful-conventions.md",
+              "backend/api/references/dto-design.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "missingDocuments": ["backend/database/SKILL.md"],
+          "negative": false,
+          "confident": true,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-27",
+          "query": "learner path completion certificate UX empty states accessibility",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "accessibility"
+              },
+              {
+                "domain": "frontend",
+                "skill": "ui"
+              }
+            ],
+            "documents": [
+              "frontend/accessibility/SKILL.md",
+              "frontend/accessibility/references/core-principles.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "accessibility",
+              "confidence": 0.662,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "description",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "heading",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "states, state, accessibility"
+                },
+                {
+                  "type": "topic",
+                  "value": "accessibility (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Form Accessibility (reference metadata)"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/accessibility/SKILL.md",
+              "frontend/accessibility/references/testing.md",
+              "frontend/accessibility/references/aria-patterns.md",
+              "frontend/accessibility/references/core-principles.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "missingDocuments": [],
+          "negative": false,
+          "confident": true,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-28",
+          "query": "accessibility requirements new page ARIA jest-axe",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "accessibility"
+              }
+            ],
+            "documents": [
+              "frontend/accessibility/SKILL.md",
+              "frontend/accessibility/references/testing.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "accessibility",
+              "confidence": 0.786,
+              "reasons": [
+                {
+                  "type": "keyword",
+                  "value": "axe"
+                },
+                {
+                  "type": "title",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "description",
+                  "value": "accessibility, aria"
+                },
+                {
+                  "type": "heading",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "accessibility, requirements, requirement, page, aria, jest, axe"
+                },
+                {
+                  "type": "topic",
+                  "value": "accessibility (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Form Accessibility (reference metadata)"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/accessibility/SKILL.md",
+              "frontend/accessibility/references/testing.md",
+              "frontend/accessibility/references/aria-patterns.md",
+              "frontend/accessibility/references/core-principles.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "missingDocuments": [],
+          "negative": false,
+          "confident": true,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-29",
+          "query": "frontend component testing standards react query feature pages",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "testing"
+              },
+              {
+                "domain": "frontend",
+                "skill": "react-query"
+              }
+            ],
+            "documents": [
+              "frontend/testing/SKILL.md",
+              "frontend/react-query/SKILL.md",
+              "frontend/testing/references/mutations.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "react-query",
+              "confidence": 0.478,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "react-query"
+                },
+                {
+                  "type": "description",
+                  "value": "react, query"
+                },
+                {
+                  "type": "heading",
+                  "value": "react, query"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "react, query, page"
+                },
+                {
+                  "type": "topic",
+                  "value": "react-query (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "query options (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Query Options (reference metadata)"
+                },
+                {
+                  "type": "domain",
+                  "value": "frontend"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.473
+                },
+                {
+                  "domain": "backend",
+                  "skill": "testing",
+                  "confidence": 0.416
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "i18n",
+                  "confidence": 0.397
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/react-query/SKILL.md",
+              "frontend/react-query/references/custom-hooks.md",
+              "frontend/react-query/references/query-options.md",
+              "frontend/react-query/references/advanced-patterns.md"
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.3333333333333333,
+          "missingDocuments": [
+            "frontend/testing/SKILL.md",
+            "frontend/testing/references/mutations.md"
+          ],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        }
+      ]
+    }
+  },
+  "after": {
+    "snow": {
+      "dataset": "SnowRunner Companion observed queries",
+      "k": 4,
+      "confidenceThreshold": 0.5,
+      "maxSkills": "per-case",
+      "metrics": {
+        "cases": 2,
+        "routeAccuracy": 1,
+        "positiveRouteAccuracy": 1,
+        "abstentionAccuracy": null,
+        "routeRecallAt3": 1,
+        "documentRecallAtK": 1,
+        "sectionRecallAtK": 1,
+        "confidentRoutes": 0,
+        "confidentErrors": 0,
+        "confidentErrorRate": null
+      },
+      "byTag": {
+        "automatic": {
+          "cases": 1,
+          "routeAccuracy": 1,
+          "positiveRouteAccuracy": 1,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 1,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": 1,
+          "confidentRoutes": 0,
+          "confidentErrors": 0,
+          "confidentErrorRate": null
+        },
+        "explicit": {
+          "cases": 1,
+          "routeAccuracy": 1,
+          "positiveRouteAccuracy": 1,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 1,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": 1,
+          "confidentRoutes": 0,
+          "confidentErrors": 0,
+          "confidentErrorRate": null
+        },
+        "snowrunner": {
+          "cases": 2,
+          "routeAccuracy": 1,
+          "positiveRouteAccuracy": 1,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 1,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": 1,
+          "confidentRoutes": 0,
+          "confidentErrors": 0,
+          "confidentErrorRate": null
+        }
+      },
+      "cases": [
+        {
+          "id": "snowrunner-01",
+          "query": "refactor TypeScript data import normalization deep modules information hiding parsing validation errors",
+          "tags": ["snowrunner", "automatic"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "common",
+                "skill": "engineering"
+              }
+            ],
+            "documents": [
+              "common/engineering/SKILL.md",
+              "common/engineering/references/readability-and-boundaries.md",
+              "common/engineering/references/contracts-and-validation.md"
+            ],
+            "sections": [
+              {
+                "path": "common/engineering/references/readability-and-boundaries.md",
+                "section": "Readability and Boundaries > Rules > Default: readable decisions and module boundaries"
+              }
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "common",
+              "skill": "engineering",
+              "confidence": 0.301,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "typescript, type, script, module, error"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "script, module, validation, errors, error"
+                },
+                {
+                  "type": "topic",
+                  "value": "error handling (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Errors and Observability (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "refactor",
+                  "confidence": 0.273
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "coding",
+                  "confidence": 0.26
+                },
+                {
+                  "domain": "backend",
+                  "skill": "coding",
+                  "confidence": 0.221
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "common/engineering/SKILL.md",
+              "common/engineering/references/errors-and-observability.md",
+              "common/engineering/references/contracts-and-validation.md",
+              "common/engineering/references/readability-and-boundaries.md"
+            ],
+            "sections": [
+              {
+                "path": "common/engineering/references/errors-and-observability.md",
+                "section": "Errors and Observability > Rules > Default: catch ownership and structured events"
+              },
+              {
+                "path": "common/engineering/references/contracts-and-validation.md",
+                "section": "Contracts and Validation > Example: validate after decoding"
+              },
+              {
+                "path": "common/engineering/references/readability-and-boundaries.md",
+                "section": "Readability and Boundaries > Rules > Default: readable decisions and module boundaries"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": 1,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "snowrunner-02",
+          "query": "module cohesion information hiding refactoring readability boundaries verification TypeScript",
+          "tags": ["snowrunner", "explicit"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "common",
+                "skill": "engineering"
+              }
+            ],
+            "documents": [
+              "common/engineering/SKILL.md",
+              "common/engineering/references/readability-and-boundaries.md"
+            ],
+            "sections": [
+              {
+                "path": "common/engineering/references/readability-and-boundaries.md",
+                "section": "Readability and Boundaries > Rules > Default: readable decisions and module boundaries"
+              }
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "common",
+              "skill": "engineering",
+              "confidence": 1,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "typescript, type, script, module, boundaries, boundary, verification"
+                },
+                {
+                  "type": "heading",
+                  "value": "boundary"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "module, refactoring, readability, boundaries, boundary, verification, script"
+                },
+                {
+                  "type": "topic",
+                  "value": "readability (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "module boundaries (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Readability and Boundaries (reference metadata)"
+                },
+                {
+                  "type": "explicit",
+                  "value": "skill: engineering"
+                },
+                {
+                  "type": "explicit",
+                  "value": "domain: common"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "common/engineering/SKILL.md",
+              "common/engineering/references/readability-and-boundaries.md",
+              "common/engineering/references/verification-and-change-safety.md"
+            ],
+            "sections": [
+              {
+                "path": "common/engineering/references/readability-and-boundaries.md",
+                "section": "Readability and Boundaries > Rules > Default: readable decisions and module boundaries"
+              },
+              {
+                "path": "common/engineering/references/verification-and-change-safety.md",
+                "section": "Verification and Change Safety > Rules > Default: behavior tests and change safety"
+              },
+              {
+                "path": "common/engineering/references/readability-and-boundaries.md",
+                "section": "Readability and Boundaries > Example: expose the decision and the mutation"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": 1,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        }
+      ]
+    },
+    "flow": {
+      "dataset": "Flow Forge observed queries",
+      "k": 5,
+      "confidenceThreshold": 0.5,
+      "maxSkills": "per-case",
+      "metrics": {
+        "cases": 29,
+        "routeAccuracy": 0.7241379310344828,
+        "positiveRouteAccuracy": 0.7894736842105263,
+        "abstentionAccuracy": 0.6,
+        "routeRecallAt3": 0.7931034482758621,
+        "documentRecallAtK": 0.5000000000000001,
+        "sectionRecallAtK": null,
+        "confidentRoutes": 4,
+        "confidentErrors": 0,
+        "confidentErrorRate": 0
+      },
+      "byTag": {
+        "explicit": {
+          "cases": 1,
+          "routeAccuracy": 1,
+          "positiveRouteAccuracy": 1,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 1,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": null,
+          "confidentRoutes": 0,
+          "confidentErrors": 0,
+          "confidentErrorRate": null
+        },
+        "flowforge": {
+          "cases": 29,
+          "routeAccuracy": 0.7241379310344828,
+          "positiveRouteAccuracy": 0.7894736842105263,
+          "abstentionAccuracy": 0.6,
+          "routeRecallAt3": 0.7931034482758621,
+          "documentRecallAtK": 0.5000000000000001,
+          "sectionRecallAtK": null,
+          "confidentRoutes": 4,
+          "confidentErrors": 0,
+          "confidentErrorRate": 0
+        },
+        "mixed": {
+          "cases": 9,
+          "routeAccuracy": 1,
+          "positiveRouteAccuracy": 1,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 1,
+          "documentRecallAtK": 0.537037037037037,
+          "sectionRecallAtK": null,
+          "confidentRoutes": 2,
+          "confidentErrors": 0,
+          "confidentErrorRate": 0
+        },
+        "negative": {
+          "cases": 10,
+          "routeAccuracy": 0.6,
+          "positiveRouteAccuracy": null,
+          "abstentionAccuracy": 0.6,
+          "routeRecallAt3": 0.6,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "confidentRoutes": 0,
+          "confidentErrors": 0,
+          "confidentErrorRate": null
+        },
+        "positive": {
+          "cases": 19,
+          "routeAccuracy": 0.7894736842105263,
+          "positiveRouteAccuracy": 0.7894736842105263,
+          "abstentionAccuracy": null,
+          "routeRecallAt3": 0.8947368421052632,
+          "documentRecallAtK": 0.5000000000000001,
+          "sectionRecallAtK": null,
+          "confidentRoutes": 4,
+          "confidentErrors": 0,
+          "confidentErrorRate": 0
+        }
+      },
+      "cases": [
+        {
+          "id": "flowforge-01",
+          "query": "course content model with video reading assignment quiz and completion rules data model",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "database"
+              }
+            ],
+            "documents": ["backend/database/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "auth",
+              "confidence": 0.291,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "content"
+                },
+                {
+                  "type": "heading",
+                  "value": "rules, rule"
+                },
+                {
+                  "type": "identifier",
+                  "value": "RULES"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "rules, rule, data"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "database",
+                  "confidence": 0.257
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "hook",
+                  "confidence": 0.257
+                },
+                {
+                  "domain": "common",
+                  "skill": "serena",
+                  "confidence": 0.238
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": ["frontend/auth/SKILL.md", "frontend/auth/references/use-auth.md"],
+            "sections": [
+              {
+                "path": "frontend/auth/references/use-auth.md",
+                "section": "useAuth Hook > Rules"
+              }
+            ]
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/database/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-02",
+          "query": "course content model validation and completion rules constraints",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "security",
+              "confidence": 0.304,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "validation"
+                },
+                {
+                  "type": "heading",
+                  "value": "rules, rule"
+                },
+                {
+                  "type": "identifier",
+                  "value": "RULES"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "validation, rules, rule"
+                },
+                {
+                  "type": "topic",
+                  "value": "input validation (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Input Validation (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "auth",
+                  "confidence": 0.272
+                },
+                {
+                  "domain": "backend",
+                  "skill": "debug",
+                  "confidence": 0.262
+                },
+                {
+                  "domain": "backend",
+                  "skill": "database",
+                  "confidence": 0.237
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/security/SKILL.md",
+              "backend/security/references/input-validation.md",
+              "backend/security/references/http-headers.md",
+              "backend/security/references/environment-config.md"
+            ],
+            "sections": [
+              {
+                "path": "backend/security/references/input-validation.md",
+                "section": "Input Validation > Rules"
+              },
+              {
+                "path": "backend/security/references/http-headers.md",
+                "section": "HTTP Security Headers > Rules"
+              },
+              {
+                "path": "backend/security/references/environment-config.md",
+                "section": "Environment Configuration > Rules"
+              }
+            ]
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-03",
+          "query": "add quiz knowledge check with scoring integrated into course progress tracking",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": [],
+            "sections": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-04",
+          "query": "course progress completion model assignment versus quiz in project-x app",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "ui",
+              "confidence": 0.313,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "project-x, app"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "project-x, app"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": ["frontend/ui/SKILL.md"],
+            "sections": []
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-05",
+          "query": "invalidate React Query enrollment queries after quiz attempt mutation updates progress",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "react-query"
+              }
+            ],
+            "documents": [
+              "frontend/react-query/SKILL.md",
+              "frontend/react-query/references/cache-invalidation.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "react-query",
+              "confidence": 0.662,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "react-query"
+                },
+                {
+                  "type": "description",
+                  "value": "react, query, mutation"
+                },
+                {
+                  "type": "heading",
+                  "value": "react, query"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "react, query, queries, mutation, updates, update"
+                },
+                {
+                  "type": "topic",
+                  "value": "react-query (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "mutations (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "useMutation for Modifying Data (reference metadata)"
+                },
+                {
+                  "type": "path",
+                  "value": "**/*.hook.ts"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "database",
+                  "confidence": 0.316
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/react-query/SKILL.md",
+              "frontend/react-query/references/advanced-patterns.md",
+              "frontend/react-query/references/query-options.md",
+              "frontend/react-query/references/custom-hooks.md"
+            ],
+            "sections": [
+              {
+                "path": "frontend/react-query/references/advanced-patterns.md",
+                "section": "Advanced React Query Patterns > Notes > Optimistic Updates"
+              },
+              {
+                "path": "frontend/react-query/references/query-options.md",
+                "section": "Query Options > Notes > Conditional Queries"
+              },
+              {
+                "path": "frontend/react-query/references/custom-hooks.md",
+                "section": "Custom Hooks Pattern > Notes > Testing with React Query"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["frontend/react-query/references/cache-invalidation.md"],
+          "negative": false,
+          "confident": true,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-06",
+          "query": "mentor admin course authoring permissions draft state modules metadata",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "security"
+              },
+              {
+                "domain": "backend",
+                "skill": "coding"
+              }
+            ],
+            "documents": ["backend/security/SKILL.md", "backend/coding/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.211,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "modules, module"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "modules, module"
+                },
+                {
+                  "type": "topic",
+                  "value": "modules (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Modules (reference metadata)"
+                },
+                {
+                  "type": "scope",
+                  "value": "No framework evidence: NestJS"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.187
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/modules.md",
+              "backend/coding/references/controllers.md"
+            ],
+            "sections": [
+              {
+                "path": "backend/coding/references/modules.md",
+                "section": "Modules > Rules"
+              },
+              {
+                "path": "backend/coding/references/controllers.md",
+                "section": "Controllers > Examples > Good example"
+              },
+              {
+                "path": "backend/coding/references/modules.md",
+                "section": "Modules > Notes"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/security/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-07",
+          "query": "course authoring",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": [],
+            "sections": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-08",
+          "query": "role-based access control draft state content authoring constraints",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/security/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": [],
+            "sections": []
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": 0,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/security/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-09",
+          "query": "course authoring MVP objectives draft status transitions frontend feature conventions",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "coding"
+              }
+            ],
+            "documents": [
+              "frontend/coding/SKILL.md",
+              "frontend/coding/references/component-structure.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "coding",
+              "confidence": 0.38,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Frontend Coding Skill"
+                },
+                {
+                  "type": "heading",
+                  "value": "frontend"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "frontend, conventions, convention"
+                },
+                {
+                  "type": "title",
+                  "value": "Hook File Conventions (reference metadata)"
+                },
+                {
+                  "type": "domain",
+                  "value": "frontend"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "api",
+                  "confidence": 0.223
+                },
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.215
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/coding/SKILL.md",
+              "frontend/coding/references/hook-file-conventions.md"
+            ],
+            "sections": [
+              {
+                "path": "frontend/coding/references/hook-file-conventions.md",
+                "section": "Hook File Conventions > Rules > Heuristics"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["frontend/coding/references/component-structure.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-10",
+          "query": "course",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": [],
+            "sections": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-11",
+          "query": "frontend component conventions",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "coding"
+              }
+            ],
+            "documents": [
+              "frontend/coding/SKILL.md",
+              "frontend/coding/references/component-structure.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "coding",
+              "confidence": 0.327,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Frontend Coding Skill"
+                },
+                {
+                  "type": "heading",
+                  "value": "frontend"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "frontend, component, conventions, convention"
+                },
+                {
+                  "type": "topic",
+                  "value": "component structure (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Component Structure (reference metadata)"
+                },
+                {
+                  "type": "domain",
+                  "value": "frontend"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.321
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "ui",
+                  "confidence": 0.32
+                },
+                {
+                  "domain": "backend",
+                  "skill": "api",
+                  "confidence": 0.219
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/coding/SKILL.md",
+              "frontend/coding/references/component-structure.md",
+              "frontend/coding/references/hook-file-conventions.md",
+              "frontend/coding/references/style-extraction-thresholds.md"
+            ],
+            "sections": [
+              {
+                "path": "frontend/coding/references/component-structure.md",
+                "section": "Component Structure > Rules > Exceptions"
+              },
+              {
+                "path": "frontend/coding/references/hook-file-conventions.md",
+                "section": "Hook File Conventions > Rules > Default"
+              },
+              {
+                "path": "frontend/coding/references/style-extraction-thresholds.md",
+                "section": "Style Extraction Thresholds > Decision Tree"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-12",
+          "query": "course publishing moderation workflow draft published archived admin approval safeguards domain rules",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "domain": "common",
+              "skill": "task-workflow",
+              "confidence": 0.366,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Task Workflow"
+                },
+                {
+                  "type": "description",
+                  "value": "workflow"
+                },
+                {
+                  "type": "heading",
+                  "value": "workflow, rules, rule"
+                },
+                {
+                  "type": "identifier",
+                  "value": "RULES"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "workflow, domain, rules, rule"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "common",
+                  "skill": "serena",
+                  "confidence": 0.262
+                },
+                {
+                  "domain": "common",
+                  "skill": "skill-creator",
+                  "confidence": 0.239
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "i18n",
+                  "confidence": 0.236
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": ["common/task-workflow/SKILL.md"],
+            "sections": []
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-13",
+          "query": "course moderation publishing workflow admin approval state machine constraints",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "common",
+                "skill": "engineering"
+              }
+            ],
+            "documents": [
+              "common/engineering/SKILL.md",
+              "common/engineering/references/state-and-recovery.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "common",
+              "skill": "task-workflow",
+              "confidence": 0.256,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Task Workflow"
+                },
+                {
+                  "type": "description",
+                  "value": "workflow"
+                },
+                {
+                  "type": "heading",
+                  "value": "workflow"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "workflow"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.163
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": ["common/task-workflow/SKILL.md"],
+            "sections": []
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [
+            "common/engineering/SKILL.md",
+            "common/engineering/references/state-and-recovery.md"
+          ],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-14",
+          "query": "backend NestJS state transitions enum validation guard conventions",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              },
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/security/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "security",
+              "confidence": 0.39,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "Backend Security Skill"
+                },
+                {
+                  "type": "description",
+                  "value": "nestjs, nest, js, validation, guard"
+                },
+                {
+                  "type": "heading",
+                  "value": "backend"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, nest, js, validation, guard"
+                },
+                {
+                  "type": "topic",
+                  "value": "input validation (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Input Validation (reference metadata)"
+                },
+                {
+                  "type": "domain",
+                  "value": "backend"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "api",
+                  "confidence": 0.383
+                },
+                {
+                  "domain": "backend",
+                  "skill": "coding",
+                  "confidence": 0.38
+                },
+                {
+                  "domain": "backend",
+                  "skill": "debug",
+                  "confidence": 0.372
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/security/SKILL.md",
+              "backend/security/references/input-validation.md"
+            ],
+            "sections": [
+              {
+                "path": "backend/security/references/input-validation.md",
+                "section": "Input Validation > Examples > Good example"
+              },
+              {
+                "path": "backend/security/references/input-validation.md",
+                "section": "Input Validation > Notes"
+              },
+              {
+                "path": "backend/security/references/input-validation.md",
+                "section": "Input Validation > Anti-patterns"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/coding/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-15",
+          "query": "learning path domain ordered modules validation admin mentor permissions",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              },
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/security/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.227,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "modules, module, validation"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "modules, module, validation"
+                },
+                {
+                  "type": "topic",
+                  "value": "modules (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Modules (reference metadata)"
+                },
+                {
+                  "type": "scope",
+                  "value": "No framework evidence: NestJS"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.19
+                },
+                {
+                  "domain": "backend",
+                  "skill": "security",
+                  "confidence": 0.167
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/modules.md",
+              "backend/coding/references/controllers.md"
+            ],
+            "sections": [
+              {
+                "path": "backend/coding/references/modules.md",
+                "section": "Modules > Rules"
+              },
+              {
+                "path": "backend/coding/references/controllers.md",
+                "section": "Controllers > Examples > Good example"
+              },
+              {
+                "path": "backend/coding/references/modules.md",
+                "section": "Modules > Notes"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/security/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-16",
+          "query": "role based access control admin mentor permissions who can create content",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/security/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": [],
+            "sections": []
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": 0,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/security/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-17",
+          "query": "NestJS module structure DTO validation service",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              }
+            ],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/modules.md",
+              "backend/coding/references/dtos.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.299,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "nestjs, nest, js, service, module, validation"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, nest, js, module, structure, dto, validation, service"
+                },
+                {
+                  "type": "topic",
+                  "value": "modules (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Modules (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "versioning",
+                  "confidence": 0.277
+                },
+                {
+                  "domain": "backend",
+                  "skill": "security",
+                  "confidence": 0.263
+                },
+                {
+                  "domain": "backend",
+                  "skill": "testing",
+                  "confidence": 0.259
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/modules.md",
+              "backend/coding/references/services.md",
+              "backend/coding/references/controllers.md"
+            ],
+            "sections": [
+              {
+                "path": "backend/coding/references/modules.md",
+                "section": "Modules > Notes"
+              },
+              {
+                "path": "backend/coding/references/services.md",
+                "section": "Services > Rules"
+              },
+              {
+                "path": "backend/coding/references/controllers.md",
+                "section": "Controllers > Examples > Bad example"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.6666666666666666,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/coding/references/dtos.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-18",
+          "query": "react form validation react-hook-form zod mutations",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "hook"
+              },
+              {
+                "domain": "frontend",
+                "skill": "ui"
+              }
+            ],
+            "documents": [
+              "frontend/hook/references/form-state.md",
+              "frontend/ui/references/forms.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "hook",
+              "confidence": 0.498,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "hook"
+                },
+                {
+                  "type": "description",
+                  "value": "hook"
+                },
+                {
+                  "type": "heading",
+                  "value": "hook"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "react, form, hook, mutation"
+                },
+                {
+                  "type": "topic",
+                  "value": "hook (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "form state (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Hooks for Form State (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "react-query",
+                  "confidence": 0.389
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.282
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "coding",
+                  "confidence": 0.179
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/hook/SKILL.md",
+              "frontend/hook/references/form-state.md",
+              "frontend/hook/references/core-principles.md",
+              "frontend/hook/references/utility-hooks.md"
+            ],
+            "sections": [
+              {
+                "path": "frontend/hook/references/form-state.md",
+                "section": "Hooks for Form State > Rules"
+              },
+              {
+                "path": "frontend/hook/references/core-principles.md",
+                "section": "Hook Principles > Rules"
+              },
+              {
+                "path": "frontend/hook/references/utility-hooks.md",
+                "section": "Utility Hooks > Notes"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["frontend/ui/references/forms.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-19",
+          "query": "NestJS service transactional Prisma module writes with DTO validation and role ownership",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              },
+              {
+                "domain": "backend",
+                "skill": "database"
+              },
+              {
+                "domain": "backend",
+                "skill": "security"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/database/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.312,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "nestjs, nest, js, service, module, validation"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, nest, js, service, prisma, module, dto, validation"
+                },
+                {
+                  "type": "topic",
+                  "value": "modules (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Modules (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "security",
+                  "confidence": 0.263
+                },
+                {
+                  "domain": "backend",
+                  "skill": "debug",
+                  "confidence": 0.261
+                },
+                {
+                  "domain": "backend",
+                  "skill": "testing",
+                  "confidence": 0.261
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/controllers.md",
+              "backend/coding/references/dtos.md",
+              "backend/coding/references/services.md"
+            ],
+            "sections": [
+              {
+                "path": "backend/coding/references/controllers.md",
+                "section": "Controllers > Examples > Bad example"
+              },
+              {
+                "path": "backend/coding/references/dtos.md",
+                "section": "DTOs (Data Transfer Objects) > Anti-patterns"
+              },
+              {
+                "path": "backend/coding/references/services.md",
+                "section": "Services > Rules"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/database/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-20",
+          "query": "transactional Prisma writes in NestJS service with class-validator DTOs and roles guard",
+          "tags": ["flowforge", "positive", "explicit"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/coding/references/dtos.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 1,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "nestjs, nest, js, service, dtos, dt, os"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "prisma, nestjs, nest, js, service, class, validator, dtos, dt, os, guard"
+                },
+                {
+                  "type": "topic",
+                  "value": "dtos (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "DTOs (Data Transfer Objects) (reference metadata)"
+                },
+                {
+                  "type": "explicit",
+                  "value": "skill: coding"
+                },
+                {
+                  "type": "explicit",
+                  "value": "domain: backend"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/coding/SKILL.md",
+              "backend/coding/references/dtos.md",
+              "backend/coding/references/services.md",
+              "backend/coding/references/controllers.md"
+            ],
+            "sections": [
+              {
+                "path": "backend/coding/references/dtos.md",
+                "section": "DTOs (Data Transfer Objects) > Anti-patterns"
+              },
+              {
+                "path": "backend/coding/references/services.md",
+                "section": "Services > Rules"
+              },
+              {
+                "path": "backend/coding/references/controllers.md",
+                "section": "Controllers > Examples > Bad example"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-21",
+          "query": "learner enrollment in learning path, progress tracking completion state, dashboard visibility",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": [],
+            "sections": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-22",
+          "query": "project-x paths modules enrollment progress product rules",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "ui",
+              "confidence": 0.274,
+              "reasons": [
+                {
+                  "type": "description",
+                  "value": "project-x"
+                },
+                {
+                  "type": "heading",
+                  "value": "rules, rule"
+                },
+                {
+                  "type": "identifier",
+                  "value": "RULES"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "project-x, path, rules, rule"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "testing",
+                  "confidence": 0.274
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.268
+                },
+                {
+                  "domain": "backend",
+                  "skill": "versioning",
+                  "confidence": 0.264
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": ["frontend/ui/SKILL.md"],
+            "sections": []
+          },
+          "routeCorrect": false,
+          "routeRecallAt3": false,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-23",
+          "query": "NestJS enrollment progress module structure DTO validation testing",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "coding"
+              },
+              {
+                "domain": "backend",
+                "skill": "testing"
+              }
+            ],
+            "documents": ["backend/coding/SKILL.md", "backend/testing/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "testing",
+              "confidence": 0.48,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "testing"
+                },
+                {
+                  "type": "description",
+                  "value": "testing, nestjs, nest, js, module"
+                },
+                {
+                  "type": "heading",
+                  "value": "testing"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, nest, js, testing"
+                },
+                {
+                  "type": "topic",
+                  "value": "testing (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.423
+                },
+                {
+                  "domain": "backend",
+                  "skill": "versioning",
+                  "confidence": 0.277
+                },
+                {
+                  "domain": "backend",
+                  "skill": "coding",
+                  "confidence": 0.272
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/testing/SKILL.md",
+              "backend/testing/references/test-layer-patterns.md",
+              "backend/testing/references/mocking-patterns.md",
+              "backend/testing/references/utility-tests.md"
+            ],
+            "sections": [
+              {
+                "path": "backend/testing/references/test-layer-patterns.md",
+                "section": "Backend Test Layer Patterns > Rules > Default"
+              },
+              {
+                "path": "backend/testing/references/mocking-patterns.md",
+                "section": "Common Mocking Patterns > Mock Guards"
+              },
+              {
+                "path": "backend/testing/references/utility-tests.md",
+                "section": "Utility/Helper Tests > Anti-patterns"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/coding/SKILL.md"],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-24",
+          "query": "learning path milestones mentor checkpoints session prompts",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": [],
+            "sections": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-25",
+          "query": "learning path milestones checkpoint states mentor session prompt",
+          "tags": ["flowforge", "negative"],
+          "expected": {
+            "routes": [],
+            "documents": []
+          },
+          "actual": {
+            "route": {
+              "confidence": 0,
+              "reasons": []
+            },
+            "relatedRoutes": [],
+            "documents": [],
+            "sections": []
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": null,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": true,
+          "confident": false,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-26",
+          "query": "nestjs module api contract prisma migration conventions",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "backend",
+                "skill": "api"
+              },
+              {
+                "domain": "backend",
+                "skill": "database"
+              },
+              {
+                "domain": "backend",
+                "skill": "coding"
+              }
+            ],
+            "documents": ["backend/api/SKILL.md", "backend/database/SKILL.md"]
+          },
+          "actual": {
+            "route": {
+              "domain": "backend",
+              "skill": "api",
+              "confidence": 0.625,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "api"
+                },
+                {
+                  "type": "description",
+                  "value": "api, conventions, convention, nestjs"
+                },
+                {
+                  "type": "heading",
+                  "value": "api"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "nestjs, api, contract, conventions, convention"
+                },
+                {
+                  "type": "topic",
+                  "value": "api (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "restful conventions (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "RESTful Conventions (reference metadata)"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "backend",
+                  "skill": "versioning",
+                  "confidence": 0.249
+                },
+                {
+                  "domain": "common",
+                  "skill": "engineering",
+                  "confidence": 0.248
+                },
+                {
+                  "domain": "backend",
+                  "skill": "database",
+                  "confidence": 0.221
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "backend/api/SKILL.md",
+              "backend/api/references/restful-conventions.md",
+              "backend/api/references/error-responses.md",
+              "backend/api/references/dto-design.md"
+            ],
+            "sections": [
+              {
+                "path": "backend/api/references/restful-conventions.md",
+                "section": "RESTful Conventions > Anti-patterns"
+              },
+              {
+                "path": "backend/api/references/error-responses.md",
+                "section": "Error Responses > Examples > NestJS Exception Classes"
+              },
+              {
+                "path": "backend/api/references/dto-design.md",
+                "section": "DTO Design > Examples > Good example"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.5,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": ["backend/database/SKILL.md"],
+          "negative": false,
+          "confident": true,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-27",
+          "query": "learner path completion certificate UX empty states accessibility",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "accessibility"
+              },
+              {
+                "domain": "frontend",
+                "skill": "ui"
+              }
+            ],
+            "documents": [
+              "frontend/accessibility/SKILL.md",
+              "frontend/accessibility/references/core-principles.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "accessibility",
+              "confidence": 0.662,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "description",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "heading",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "states, state, accessibility"
+                },
+                {
+                  "type": "topic",
+                  "value": "accessibility (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Form Accessibility (reference metadata)"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/accessibility/SKILL.md",
+              "frontend/accessibility/references/testing.md",
+              "frontend/accessibility/references/core-principles.md",
+              "frontend/accessibility/references/aria-patterns.md"
+            ],
+            "sections": [
+              {
+                "path": "frontend/accessibility/references/testing.md",
+                "section": "Testing Accessibility"
+              },
+              {
+                "path": "frontend/accessibility/references/core-principles.md",
+                "section": "Accessibility Core Principles > Rules"
+              },
+              {
+                "path": "frontend/accessibility/references/aria-patterns.md",
+                "section": "ARIA Patterns > Rules"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": false,
+          "confident": true,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-28",
+          "query": "accessibility requirements new page ARIA jest-axe",
+          "tags": ["flowforge", "positive"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "accessibility"
+              }
+            ],
+            "documents": [
+              "frontend/accessibility/SKILL.md",
+              "frontend/accessibility/references/testing.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "accessibility",
+              "confidence": 0.786,
+              "reasons": [
+                {
+                  "type": "keyword",
+                  "value": "axe"
+                },
+                {
+                  "type": "title",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "description",
+                  "value": "accessibility, aria"
+                },
+                {
+                  "type": "heading",
+                  "value": "accessibility"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "accessibility, requirements, requirement, page, aria, jest, axe"
+                },
+                {
+                  "type": "topic",
+                  "value": "accessibility (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Form Accessibility (reference metadata)"
+                }
+              ],
+              "alternatives": []
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/accessibility/SKILL.md",
+              "frontend/accessibility/references/testing.md",
+              "frontend/accessibility/references/aria-patterns.md",
+              "frontend/accessibility/references/forms.md"
+            ],
+            "sections": [
+              {
+                "path": "frontend/accessibility/references/testing.md",
+                "section": "Testing Accessibility > Examples > Good example"
+              },
+              {
+                "path": "frontend/accessibility/references/aria-patterns.md",
+                "section": "ARIA Patterns > Examples > Bad example"
+              },
+              {
+                "path": "frontend/accessibility/references/forms.md",
+                "section": "Form Accessibility > Rules"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 1,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [],
+          "negative": false,
+          "confident": true,
+          "confidentError": false
+        },
+        {
+          "id": "flowforge-29",
+          "query": "frontend component testing standards react query feature pages",
+          "tags": ["flowforge", "positive", "mixed"],
+          "expected": {
+            "routes": [
+              {
+                "domain": "frontend",
+                "skill": "testing"
+              },
+              {
+                "domain": "frontend",
+                "skill": "react-query"
+              }
+            ],
+            "documents": [
+              "frontend/testing/SKILL.md",
+              "frontend/react-query/SKILL.md",
+              "frontend/testing/references/mutations.md"
+            ]
+          },
+          "actual": {
+            "route": {
+              "domain": "frontend",
+              "skill": "react-query",
+              "confidence": 0.478,
+              "reasons": [
+                {
+                  "type": "title",
+                  "value": "react-query"
+                },
+                {
+                  "type": "description",
+                  "value": "react, query"
+                },
+                {
+                  "type": "heading",
+                  "value": "react, query"
+                },
+                {
+                  "type": "fulltext",
+                  "value": "react, query, page"
+                },
+                {
+                  "type": "topic",
+                  "value": "react-query (reference metadata)"
+                },
+                {
+                  "type": "topic",
+                  "value": "query options (reference metadata)"
+                },
+                {
+                  "type": "title",
+                  "value": "Query Options (reference metadata)"
+                },
+                {
+                  "type": "domain",
+                  "value": "frontend"
+                }
+              ],
+              "alternatives": [
+                {
+                  "domain": "frontend",
+                  "skill": "testing",
+                  "confidence": 0.473
+                },
+                {
+                  "domain": "backend",
+                  "skill": "testing",
+                  "confidence": 0.416
+                },
+                {
+                  "domain": "frontend",
+                  "skill": "i18n",
+                  "confidence": 0.397
+                }
+              ]
+            },
+            "relatedRoutes": [],
+            "documents": [
+              "frontend/react-query/SKILL.md",
+              "frontend/react-query/references/query-options.md",
+              "frontend/react-query/references/advanced-patterns.md",
+              "frontend/react-query/references/custom-hooks.md"
+            ],
+            "sections": [
+              {
+                "path": "frontend/react-query/references/query-options.md",
+                "section": "Query Options > Examples > Bad example"
+              },
+              {
+                "path": "frontend/react-query/references/advanced-patterns.md",
+                "section": "Advanced React Query Patterns > Anti-patterns"
+              },
+              {
+                "path": "frontend/react-query/references/custom-hooks.md",
+                "section": "Custom Hooks Pattern > Notes > Testing with React Query"
+              }
+            ]
+          },
+          "routeCorrect": true,
+          "routeRecallAt3": true,
+          "documentRecallAtK": 0.3333333333333333,
+          "sectionRecallAtK": null,
+          "missingSections": [],
+          "missingDocuments": [
+            "frontend/testing/SKILL.md",
+            "frontend/testing/references/mutations.md"
+          ],
+          "negative": false,
+          "confident": false,
+          "confidentError": false
+        }
+      ]
+    }
+  },
+  "anonymization": "Client identifiers, paths and affected query/evidence text replaced with Project X or project-x. These fields are anonymized historical evidence, not verbatim strings or executable paths."
+}

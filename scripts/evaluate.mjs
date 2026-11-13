@@ -55,6 +55,9 @@ async function main() {
         skill: route.skill,
       });
     }
+    for (const section of dataset.cases.flatMap((item) => item.expected.sections ?? [])) {
+      await retriever.read({ path: section.path, section: section.section });
+    }
     const report = await evaluateCases(dataset.cases, (request) => retriever.search(request), {
       k: values.k === undefined ? 5 : Number(values.k),
       maxSkills: values['max-skills'] === undefined ? undefined : Number(values['max-skills']),

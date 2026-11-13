@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "name": "SnowRunner Companion observed queries",
+  "labeling": "Exact queries from user-supplied agent report dated 2026-11-13. Expected labels proposed by this agent; not user-reviewed.",
+  "cases": [
+    {
+      "id": "snowrunner-01",
+      "tags": ["snowrunner", "automatic"],
+      "source": {
+        "kind": "agent-report",
+        "date": "2026-11-13",
+        "command": "search"
+      },
+      "request": {
+        "query": "refactor TypeScript data import normalization deep modules information hiding parsing validation errors",
+        "limit": 4,
+        "paths": ["tools/data-import/src/normalize.ts"]
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "common",
+            "skill": "engineering"
+          }
+        ],
+        "documents": [
+          "common/engineering/SKILL.md",
+          "common/engineering/references/readability-and-boundaries.md",
+          "common/engineering/references/contracts-and-validation.md"
+        ],
+        "sections": [
+          {
+            "path": "common/engineering/references/readability-and-boundaries.md",
+            "section": "Readability and Boundaries > Rules > Default: readable decisions and module boundaries"
+          }
+        ]
+      },
+      "rationale": "Agent-labeled shared engineering guidance for framework-free importer work; exact observed query. Explicit selection does not test automatic discovery."
+    },
+    {
+      "id": "snowrunner-02",
+      "tags": ["snowrunner", "explicit"],
+      "source": {
+        "kind": "agent-report",
+        "date": "2026-11-13",
+        "command": "search"
+      },
+      "request": {
+        "query": "module cohesion information hiding refactoring readability boundaries verification TypeScript",
+        "limit": 4,
+        "domain": "common",
+        "skill": "engineering"
+      },
+      "expected": {
+        "routes": [
+          {
+            "domain": "common",
+            "skill": "engineering"
+          }
+        ],
+        "documents": [
+          "common/engineering/SKILL.md",
+          "common/engineering/references/readability-and-boundaries.md"
+        ],
+        "sections": [
+          {
+            "path": "common/engineering/references/readability-and-boundaries.md",
+            "section": "Readability and Boundaries > Rules > Default: readable decisions and module boundaries"
+          }
+        ]
+      },
+      "rationale": "Agent-labeled shared engineering guidance for framework-free importer work; exact observed query. Explicit selection does not test automatic discovery."
+    }
+  ]
+}
