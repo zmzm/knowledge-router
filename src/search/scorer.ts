@@ -26,6 +26,26 @@ export function strongTextMatch(matches: string[], query: Query): boolean {
   return hits.length >= 2 && hits.length / words.size >= 0.75;
 }
 
+// These words describe almost any coding task. Keep them searchable in content and
+// curated phrases, but do not let an incidental description match establish scope.
+const genericDescriptionTerms = new Set([
+  'user',
+  'users',
+  'data',
+  'rule',
+  'rules',
+  'feature',
+  'features',
+  'pattern',
+  'patterns',
+  'convention',
+  'conventions',
+  'guidance',
+  'code',
+]);
+const structuralHeading =
+  /^(when (not )?to use( this knowledge)?|rules|local rules|knowledge map|maintenance notes|boundary with other skills|what this skill covers|fast decision hints)$/i;
+
 export function metadataScore(doc: IndexedDocument, query: Query): Score {
   let score = 0;
   const reasons: SearchReason[] = [];
@@ -93,7 +113,9 @@ export function metadataScore(doc: IndexedDocument, query: Query): Score {
     reasons.push({ type: 'title', value: titleValue });
   }
   if (doc.description) {
-    const hits = matchingTerms(doc.description, query);
+    const hits = matchingTerms(doc.description, query).filter(
+      (term) => !genericDescriptionTerms.has(term),
+    );
     score +=
       8 *
       Math.min(3, hits.length / Math.sqrt(Math.max(1, new Set(tokenize(doc.description)).size)));
@@ -111,9 +133,17 @@ export function scoreText(
   section?: IndexedHeading,
 ): Score {
   const result = metadataScore(doc, query);
+  if (section) {
+    // Document metadata supplies context, but cannot dominate local section evidence.
+    result.score = Math.min(18, result.score * 0.75);
+    result.metadataScore = result.score;
+  }
   const headingText = section
     ? section.hierarchy.join(' ')
-    : doc.headings.map((heading) => heading.title).join(' ');
+    : doc.headings
+        .filter((heading) => !structuralHeading.test(heading.title))
+        .map((heading) => heading.title)
+        .join(' ');
   const headingHits = matchingTerms(headingText, query);
   if (headingHits.length) {
     result.score +=
@@ -128,6 +158,7 @@ export function scoreText(
   const identifiers = [...new Set(rawTokens(section?.code ?? doc.code))].filter(
     (value) =>
       queryIdentifiers.has(value.toLowerCase()) &&
+      (!/^[A-Z][A-Z_]+$/.test(value) || query.originals.includes(value)) &&
       (/[a-z][A-Z]|[A-Z]{2}|[_$]/.test(value) ||
         (/^[A-Z]/.test(value) && query.originals.includes(value))) &&
       tokenize(value).length > 0,

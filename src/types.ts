@@ -20,6 +20,8 @@ export interface IndexedDocument {
   title?: string;
   name?: string;
   description?: string;
+  /** Optional framework scope; absent query/path evidence reduces automatic routing weight. */
+  frameworks?: string[];
   topics: string[];
   aliases: string[];
   keywords: string[];
@@ -39,6 +41,7 @@ export interface IndexedDocument {
 
 export interface SearchReason {
   type:
+    | 'scope'
     | 'keyword'
     | 'topic'
     | 'alias'

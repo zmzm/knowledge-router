@@ -16,7 +16,17 @@ export function validateDataset(dataset) {
       ) ||
       !Array.isArray(item.expected.documents) ||
       !item.expected.documents.every((path) => typeof path === 'string' && path.length > 0) ||
-      (!item.expected.routes.length && item.expected.documents.length)
+      (item.expected.sections !== undefined &&
+        (!Array.isArray(item.expected.sections) ||
+          !item.expected.sections.every(
+            (section) =>
+              typeof section.path === 'string' &&
+              section.path.length > 0 &&
+              typeof section.section === 'string' &&
+              section.section.length > 0,
+          ))) ||
+      (!item.expected.routes.length &&
+        (item.expected.documents.length || item.expected.sections?.length))
     ) {
       throw new Error(`Invalid or duplicate evaluation case: ${item.id}`);
     }
@@ -63,6 +73,20 @@ export async function evaluateCases(
     const documents = [...new Set(item.expected.documents)];
     const returned = [...new Set(response.results.slice(0, k).map((result) => result.path))];
     const found = documents.filter((path) => returned.includes(path));
+    const sections = [
+      ...new Map(
+        (item.expected.sections ?? []).map((section) => [
+          JSON.stringify([section.path, section.section]),
+          section,
+        ]),
+      ).values(),
+    ];
+    const missingSections = sections.filter(
+      (expected) =>
+        !response.results
+          .slice(0, k)
+          .some((result) => result.path === expected.path && result.section === expected.section),
+    );
     const confident =
       !request.skill && !!response.route.skill && response.route.confidence >= confidenceThreshold;
     details.push({
@@ -74,10 +98,16 @@ export async function evaluateCases(
         route: response.route,
         relatedRoutes: response.relatedRoutes ?? [],
         documents: returned,
+        sections: response.results
+          .slice(0, k)
+          .filter((result) => result.section)
+          .map(({ path, section }) => ({ path, section })),
       },
       routeCorrect: !!routeCorrect,
       routeRecallAt3: !!routeRecallAt3,
       documentRecallAtK: documents.length ? found.length / documents.length : null,
+      sectionRecallAtK: sections.length ? 1 - missingSections.length / sections.length : null,
+      missingSections,
       missingDocuments: documents.filter((path) => !returned.includes(path)),
       negative: !acceptable.length,
       confident,
@@ -112,6 +142,9 @@ function aggregate(items) {
     abstentionAccuracy: mean(negative.map((item) => item.routeCorrect)),
     routeRecallAt3: mean(items.map((item) => item.routeRecallAt3)),
     documentRecallAtK: mean(withDocuments.map((item) => item.documentRecallAtK)),
+    sectionRecallAtK: mean(
+      items.filter((item) => item.sectionRecallAtK !== null).map((item) => item.sectionRecallAtK),
+    ),
     confidentRoutes: confident.length,
     confidentErrors: confident.filter((item) => item.confidentError).length,
     confidentErrorRate: mean(confident.map((item) => item.confidentError)),

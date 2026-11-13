@@ -112,3 +112,44 @@ test('evaluation handles empty denominators and validates thresholds and case la
     /positive integer/,
   );
 });
+
+test('section recall requires both the document and substantive section within the budget', async () => {
+  const section = { path: 'guide.md', section: 'Guide > Validate before effects' };
+  const cases = [
+    {
+      id: 'sections',
+      request: { query: 'validate' },
+      expected: {
+        routes: [{ domain: 'common', skill: 'engineering' }],
+        documents: ['guide.md'],
+        sections: [section, section],
+      },
+    },
+  ];
+  const search = async () => ({
+    route: { domain: 'common', skill: 'engineering', confidence: 0.3 },
+    results: [{ path: 'guide.md', section: 'Guide > Related guidance' }, section],
+  });
+  const miss = await evaluateCases(cases, search, { k: 1 });
+  assert.equal(miss.metrics.documentRecallAtK, 1);
+  assert.equal(miss.metrics.sectionRecallAtK, 0);
+  assert.deepEqual(miss.cases[0].missingSections, [section]);
+  const hit = await evaluateCases(cases, search, { k: 2 });
+  assert.equal(hit.metrics.sectionRecallAtK, 1);
+  assert.deepEqual(hit.cases[0].missingSections, []);
+  const unlabeled = await evaluateCases(
+    [{ ...cases[0], expected: { routes: cases[0].expected.routes, documents: [] } }],
+    search,
+  );
+  assert.equal(unlabeled.metrics.sectionRecallAtK, null);
+  assert.throws(
+    () =>
+      validateDataset({
+        schemaVersion: 1,
+        cases: [
+          { ...cases[0], expected: { ...cases[0].expected, sections: [{ path: 'guide.md' }] } },
+        ],
+      }),
+    /Invalid/,
+  );
+});

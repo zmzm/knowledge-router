@@ -124,6 +124,9 @@ export async function loadIndex(
           const field = (doc as unknown as Record<string, unknown>)[key];
           return field === undefined || typeof field === 'string';
         }) ||
+        (doc.frameworks !== undefined &&
+          (!Array.isArray(doc.frameworks) ||
+            !doc.frameworks.every((item) => typeof item === 'string'))) ||
         (doc.canonical !== undefined && typeof doc.canonical !== 'boolean') ||
         !Number.isFinite(doc.modifiedAt) ||
         !Number.isFinite(doc.size) ||

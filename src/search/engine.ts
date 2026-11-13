@@ -107,7 +107,10 @@ export class SearchEngine {
       throw new Error('paths must be an array of strings');
     }
     if (request.domain && !this.documents.some((doc) => doc.domain === request.domain)) {
-      throw new Error(`Unknown domain: ${request.domain}`);
+      const domains = [...new Set(this.documents.map((doc) => doc.domain).filter(Boolean))].sort();
+      throw new Error(
+        `Unknown domain: ${request.domain}. Available domains: ${domains.join(', ')}. Use --skill for a skill name.`,
+      );
     }
     const referenceEvidence = new Map<string, Score>();
     const namedDomains = new Set(
@@ -193,6 +196,18 @@ export class SearchEngine {
         });
       }
       const paths = pathScore(doc, request.paths ?? []);
+      if (
+        !request.skill &&
+        doc.frameworks?.length &&
+        !doc.frameworks.some((framework) => containsPhrase(query.text, framework)) &&
+        !paths.length
+      ) {
+        scored.score *= 0.4;
+        scored.reasons.push({
+          type: 'scope',
+          value: `No framework evidence: ${doc.frameworks.join(', ')}`,
+        });
+      }
       if (paths.length) {
         scored.score += 8;
         scored.reasons.push(...paths);
@@ -406,7 +421,16 @@ export class SearchEngine {
         return;
       }
       const scored = scoreText(doc, query, this.sectionCorpus.score(index, query.terms), heading);
-      if (scored.score >= 5) {
+      // Navigation remains available for lookup, but should not crowd out guidance.
+      if (
+        /^(related (guidance|links)|knowledge map|when to use|introduction)$/i.test(
+          heading.title,
+        ) ||
+        (heading.level === 1 && tokenize(heading.prose).length < 30 && !heading.code)
+      ) {
+        scored.score *= 0.35;
+      }
+      if (scored.score >= 5 || metadataScore(doc, query).score >= 5) {
         references.push(this.result(doc, scored, heading));
       } else if (strongTextMatch(localMatches, query)) {
         scored.reasons.push({
@@ -416,9 +440,18 @@ export class SearchEngine {
         fallback.push(this.result(doc, scored, heading));
       }
     });
-    return (references.length ? references : fallback).sort(
+    const ranked = (references.length ? references : fallback).sort(
       (a, b) => b.score - a.score || compareText(a.path, b.path) || a.startLine - b.startLine,
     );
+    // Offer the best section of each document before spending more slots on one file.
+    const seen = new Set<string>();
+    const first: SearchResult[] = [];
+    const rest: SearchResult[] = [];
+    for (const result of ranked) {
+      (seen.has(result.path) ? rest : first).push(result);
+      seen.add(result.path);
+    }
+    return [...first, ...rest];
   }
 
   private result(doc: IndexedDocument, score: Score, heading?: IndexedHeading): SearchResult {

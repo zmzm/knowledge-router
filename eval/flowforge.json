@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "name": "Flow Forge observed queries",
-  "labeling": "Agent-reviewed against the current coding vault; not yet user-reviewed. Empty routes denote product questions outside the coding vault.",
+  "labeling": "Agent-reviewed against the current coding vault; not yet user-reviewed. Empty routes denote product questions outside the coding vault. Client identifiers are anonymized as Project X; affected queries are not verbatim log strings.",
   "cases": [
     {
       "id": "flowforge-01",
@@ -72,7 +72,7 @@
         "command": "search"
       },
       "request": {
-        "query": "course progress completion model assignment versus quiz in mentory app"
+        "query": "course progress completion model assignment versus quiz in project-x app"
       },
       "expected": {
         "routes": [],
@@ -505,7 +505,7 @@
         "command": "search"
       },
       "request": {
-        "query": "mentory paths modules enrollment progress product rules"
+        "query": "project-x paths modules enrollment progress product rules"
       },
       "expected": {
         "routes": [],

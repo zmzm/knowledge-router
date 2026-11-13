@@ -1,0 +1,1153 @@
+{
+  "date": "2026-11-13",
+  "kind": "Current-index replay of 19 searches identified in user-supplied historical review",
+  "limitations": "Current responses are not historical responses. No relevance labels, accuracy claims, or vault-coverage conclusions are assigned.",
+  "cases": [
+    {
+      "source": {
+        "file": "20261104_030012_e400f889074c4fbb88af7a67d297a6ad_f11-d4.log",
+        "line": 8
+      },
+      "request": {
+        "query": "rule-based recommendations personalization from user activity and progress data",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "error-handling",
+          "confidence": 0.122,
+          "reasons": [
+            {
+              "type": "description",
+              "value": "user"
+            },
+            {
+              "type": "heading",
+              "value": "rule"
+            },
+            {
+              "type": "fulltext",
+              "value": "rule, user"
+            },
+            {
+              "type": "scope",
+              "value": "No framework evidence: React"
+            }
+          ],
+          "alternatives": []
+        },
+        "results": [
+          {
+            "path": "frontend/error-handling/SKILL.md",
+            "score": 2.082
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261104_030012_e400f889074c4fbb88af7a67d297a6ad_f11-d4.log",
+        "line": 12
+      },
+      "request": {
+        "query": "recommendation feature product requirements learning paths course progress domain rules privacy user data",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "hook",
+          "confidence": 0.261,
+          "reasons": [
+            {
+              "type": "heading",
+              "value": "rules, rule"
+            },
+            {
+              "type": "identifier",
+              "value": "RULES"
+            },
+            {
+              "type": "fulltext",
+              "value": "domain, rules, rule, data"
+            },
+            {
+              "type": "topic",
+              "value": "data fetching (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Hooks for Data Fetching (reference metadata)"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "backend",
+              "skill": "database",
+              "confidence": 0.257
+            },
+            {
+              "domain": "backend",
+              "skill": "security",
+              "confidence": 0.254
+            },
+            {
+              "domain": "frontend",
+              "skill": "testing",
+              "confidence": 0.254
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "frontend/hook/SKILL.md",
+            "score": 9.941
+          },
+          {
+            "path": "frontend/hook/references/data-fetching.md",
+            "section": "Hooks for Data Fetching > Rules",
+            "score": 10.44
+          },
+          {
+            "path": "frontend/hook/references/core-principles.md",
+            "section": "Hook Principles > Rules",
+            "score": 6.717
+          },
+          {
+            "path": "frontend/hook/references/form-state.md",
+            "section": "Hooks for Form State > Rules",
+            "score": 5.638
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261104_030012_e400f889074c4fbb88af7a67d297a6ad_f11-d4.log",
+        "line": 116
+      },
+      "request": {
+        "query": "NestJS backend feature module service controller testing conventions",
+        "limit": 4
+      },
+      "replay": {
+        "route": {
+          "domain": "backend",
+          "skill": "testing",
+          "confidence": 0.601,
+          "reasons": [
+            {
+              "type": "title",
+              "value": "testing"
+            },
+            {
+              "type": "description",
+              "value": "testing, nestjs, nest, js, controller, service, backend, module"
+            },
+            {
+              "type": "heading",
+              "value": "backend, testing"
+            },
+            {
+              "type": "fulltext",
+              "value": "nestjs, nest, js, service, controller, testing, conventions, convention"
+            },
+            {
+              "type": "topic",
+              "value": "testing (reference metadata)"
+            },
+            {
+              "type": "topic",
+              "value": "controller tests (reference metadata)"
+            },
+            {
+              "type": "topic",
+              "value": "service tests (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Backend Test Layer Patterns (reference metadata)"
+            },
+            {
+              "type": "domain",
+              "value": "backend"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "frontend",
+              "skill": "testing",
+              "confidence": 0.425
+            },
+            {
+              "domain": "backend",
+              "skill": "coding",
+              "confidence": 0.411
+            },
+            {
+              "domain": "backend",
+              "skill": "api",
+              "confidence": 0.382
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "backend/testing/SKILL.md",
+            "score": 47.401
+          },
+          {
+            "path": "backend/testing/references/test-layer-patterns.md",
+            "section": "Backend Test Layer Patterns > Anti-patterns",
+            "score": 23.196
+          },
+          {
+            "path": "backend/testing/references/mocking-patterns.md",
+            "section": "Common Mocking Patterns > Mock PrismaService",
+            "score": 17.73
+          },
+          {
+            "path": "backend/testing/references/utility-tests.md",
+            "section": "Utility/Helper Tests > Anti-patterns",
+            "score": 15.448
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261104_030012_e400f889074c4fbb88af7a67d297a6ad_f11-d4.log",
+        "line": 120
+      },
+      "request": {
+        "query": "React frontend component hook testing react-query msw conventions",
+        "limit": 3
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "testing",
+          "confidence": 0.495,
+          "reasons": [
+            {
+              "type": "title",
+              "value": "testing"
+            },
+            {
+              "type": "description",
+              "value": "testing, msw, component"
+            },
+            {
+              "type": "heading",
+              "value": "frontend, testing"
+            },
+            {
+              "type": "fulltext",
+              "value": "react, frontend, component, testing, query, msw, conventions, convention"
+            },
+            {
+              "type": "topic",
+              "value": "testing (reference metadata)"
+            },
+            {
+              "type": "topic",
+              "value": "msw setup (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "MSW Setup Guide (reference metadata)"
+            },
+            {
+              "type": "domain",
+              "value": "frontend"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "frontend",
+              "skill": "react-query",
+              "confidence": 0.476
+            },
+            {
+              "domain": "frontend",
+              "skill": "hook",
+              "confidence": 0.468
+            },
+            {
+              "domain": "backend",
+              "skill": "testing",
+              "confidence": 0.418
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "frontend/testing/SKILL.md",
+            "score": 43.084
+          },
+          {
+            "path": "frontend/testing/references/msw-setup.md",
+            "section": "MSW Setup Guide > Examples > Bad example",
+            "score": 24.874
+          },
+          {
+            "path": "frontend/testing/references/mutations.md",
+            "section": "Testing Mutations > Examples > Good example",
+            "score": 24.727
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261103_030009_85d9d8770aed46b38a57f5edc276d31a_f11-d3.log",
+        "line": 17
+      },
+      "request": {
+        "query": "mentor discovery featured content admin-managed sections access boundary privacy roles",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "auth",
+          "confidence": 0.235,
+          "reasons": [
+            {
+              "type": "description",
+              "value": "content"
+            },
+            {
+              "type": "heading",
+              "value": "boundary"
+            },
+            {
+              "type": "fulltext",
+              "value": "access, boundary"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "frontend",
+              "skill": "error-handling",
+              "confidence": 0.09
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "frontend/auth/SKILL.md",
+            "score": 5.715
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261103_030009_85d9d8770aed46b38a57f5edc276d31a_f11-d3.log",
+        "line": 21
+      },
+      "request": {
+        "query": "admin role authorization who can manage featured mentors content moderation permissions",
+        "domain": "auth",
+        "limit": 5
+      },
+      "replay": {
+        "error": "Unknown domain: auth"
+      }
+    },
+    {
+      "source": {
+        "file": "20261103_030009_85d9d8770aed46b38a57f5edc276d31a_f11-d3.log",
+        "line": 24
+      },
+      "request": {
+        "query": "admin role authorization manage featured content permissions mentor visibility privacy",
+        "skill": "auth",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "auth",
+          "confidence": 1,
+          "reasons": [
+            {
+              "type": "description",
+              "value": "content"
+            },
+            {
+              "type": "explicit",
+              "value": "skill: auth"
+            }
+          ],
+          "alternatives": []
+        },
+        "results": [
+          {
+            "path": "frontend/auth/SKILL.md",
+            "score": 2.667
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261103_030009_85d9d8770aed46b38a57f5edc276d31a_f11-d3.log",
+        "line": 129
+      },
+      "request": {
+        "query": "admin role authorization guard protected endpoints",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "routing",
+          "confidence": 0.19,
+          "reasons": [
+            {
+              "type": "description",
+              "value": "guard"
+            },
+            {
+              "type": "fulltext",
+              "value": "guard, protected"
+            },
+            {
+              "type": "topic",
+              "value": "route guards (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Route Guards (reference metadata)"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "backend",
+              "skill": "security",
+              "confidence": 0.173
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "frontend/routing/SKILL.md",
+            "score": 5.869
+          },
+          {
+            "path": "frontend/routing/references/route-guards.md",
+            "section": "Route Guards > Notes > Public vs Protected Routes",
+            "score": 9.426
+          },
+          {
+            "path": "frontend/routing/references/route-guards.md",
+            "section": "Route Guards > Examples > Good example",
+            "score": 8.153
+          },
+          {
+            "path": "frontend/routing/references/route-guards.md",
+            "section": "Route Guards > Anti-patterns",
+            "score": 8.02
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261103_030009_85d9d8770aed46b38a57f5edc276d31a_f11-d3.log",
+        "line": 132
+      },
+      "request": {
+        "query": "public user profile fields privacy exposure",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "confidence": 0,
+          "reasons": []
+        },
+        "results": []
+      }
+    },
+    {
+      "source": {
+        "file": "20261103_030009_85d9d8770aed46b38a57f5edc276d31a_f11-d3.log",
+        "line": 137
+      },
+      "request": {
+        "query": "react-query mutations query invalidation cache",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "react-query",
+          "confidence": 0.666,
+          "reasons": [
+            {
+              "type": "title",
+              "value": "react-query"
+            },
+            {
+              "type": "description",
+              "value": "react, query, mutations, mutation"
+            },
+            {
+              "type": "heading",
+              "value": "react, query"
+            },
+            {
+              "type": "fulltext",
+              "value": "react, query, mutations, mutation, invalidation, cache"
+            },
+            {
+              "type": "topic",
+              "value": "react-query (reference metadata)"
+            },
+            {
+              "type": "topic",
+              "value": "cache invalidation (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Cache Invalidation (reference metadata)"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "frontend",
+              "skill": "testing",
+              "confidence": 0.282
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "frontend/react-query/SKILL.md",
+            "score": 42.004
+          },
+          {
+            "path": "frontend/react-query/references/cache-invalidation.md",
+            "section": "Cache Invalidation > Rules",
+            "score": 25.732
+          },
+          {
+            "path": "frontend/react-query/references/mutations.md",
+            "section": "useMutation for Modifying Data > Rules",
+            "score": 24.595
+          },
+          {
+            "path": "frontend/react-query/references/query-options.md",
+            "section": "Query Options > Rules",
+            "score": 21.981
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261102_030001_47fbf26b4dfc4546a2fb04d5327c47c2_f11-d2.log",
+        "line": 9
+      },
+      "request": {
+        "query": "global search catalog filters sorting URL state search semantics domain rules",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "react-query",
+          "confidence": 0.281,
+          "reasons": [
+            {
+              "type": "description",
+              "value": "state"
+            },
+            {
+              "type": "heading",
+              "value": "rules, rule"
+            },
+            {
+              "type": "identifier",
+              "value": "RULES"
+            },
+            {
+              "type": "fulltext",
+              "value": "state, domain, rules, rule"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "frontend",
+              "skill": "coding",
+              "confidence": 0.268
+            },
+            {
+              "domain": "common",
+              "skill": "serena",
+              "confidence": 0.267
+            },
+            {
+              "domain": "frontend",
+              "skill": "hook",
+              "confidence": 0.259
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "frontend/react-query/SKILL.md",
+            "score": 11.012
+          },
+          {
+            "path": "frontend/react-query/references/mutations.md",
+            "section": "useMutation for Modifying Data > Rules",
+            "score": 5.897
+          },
+          {
+            "path": "frontend/react-query/references/custom-hooks.md",
+            "section": "Custom Hooks Pattern > Rules",
+            "score": 5.667
+          },
+          {
+            "path": "frontend/react-query/references/cache-invalidation.md",
+            "section": "Cache Invalidation > Rules",
+            "score": 5
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261102_030001_47fbf26b4dfc4546a2fb04d5327c47c2_f11-d2.log",
+        "line": 164
+      },
+      "request": {
+        "query": "URL-backed search filter state query params react router",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "react-query",
+          "confidence": 0.593,
+          "reasons": [
+            {
+              "type": "title",
+              "value": "react-query"
+            },
+            {
+              "type": "description",
+              "value": "state, react, query"
+            },
+            {
+              "type": "heading",
+              "value": "react, query"
+            },
+            {
+              "type": "fulltext",
+              "value": "state, query, react"
+            },
+            {
+              "type": "topic",
+              "value": "react-query (reference metadata)"
+            },
+            {
+              "type": "topic",
+              "value": "query options (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Query Options (reference metadata)"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "frontend",
+              "skill": "routing",
+              "confidence": 0.203
+            },
+            {
+              "domain": "frontend",
+              "skill": "coding",
+              "confidence": 0.193
+            },
+            {
+              "domain": "backend",
+              "skill": "database",
+              "confidence": 0.164
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "frontend/react-query/SKILL.md",
+            "score": 27.687
+          },
+          {
+            "path": "frontend/react-query/references/query-options.md",
+            "section": "Query Options > Anti-patterns",
+            "score": 17.03
+          },
+          {
+            "path": "frontend/react-query/references/advanced-patterns.md",
+            "section": "Advanced React Query Patterns > Anti-patterns",
+            "score": 16.642
+          },
+          {
+            "path": "frontend/react-query/references/custom-hooks.md",
+            "section": "Custom Hooks Pattern > Notes > Testing with React Query",
+            "score": 14.682
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261102_030001_47fbf26b4dfc4546a2fb04d5327c47c2_f11-d2.log",
+        "line": 167
+      },
+      "request": {
+        "query": "filtering sorting pagination API query validation backend",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "backend",
+          "skill": "api",
+          "confidence": 0.549,
+          "reasons": [
+            {
+              "type": "title",
+              "value": "api"
+            },
+            {
+              "type": "description",
+              "value": "api, query, pagination"
+            },
+            {
+              "type": "heading",
+              "value": "backend, api"
+            },
+            {
+              "type": "fulltext",
+              "value": "filtering, sorting, pagination, api, query, validation"
+            },
+            {
+              "type": "topic",
+              "value": "api (reference metadata)"
+            },
+            {
+              "type": "topic",
+              "value": "query parameters (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Query Parameters (reference metadata)"
+            },
+            {
+              "type": "domain",
+              "value": "backend"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "backend",
+              "skill": "database",
+              "confidence": 0.422
+            },
+            {
+              "domain": "backend",
+              "skill": "debug",
+              "confidence": 0.341
+            },
+            {
+              "domain": "backend",
+              "skill": "security",
+              "confidence": 0.333
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "backend/api/SKILL.md",
+            "score": 39.794
+          },
+          {
+            "path": "backend/api/references/query-parameters.md",
+            "section": "Query Parameters > Rules",
+            "score": 20.313
+          },
+          {
+            "path": "backend/api/references/dto-design.md",
+            "section": "DTO Design > Notes",
+            "score": 16.17
+          },
+          {
+            "path": "backend/api/references/nested-resources.md",
+            "section": "Nested Resources > Notes",
+            "score": 15.701
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261101_030001_920045a5c41642ec99b9f60fe18ec4dc_f11-d1.log",
+        "line": 8
+      },
+      "request": {
+        "query": "search feature privacy access control data exposure courses mentors",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "confidence": 0,
+          "reasons": []
+        },
+        "results": []
+      }
+    },
+    {
+      "source": {
+        "file": "20261101_030001_920045a5c41642ec99b9f60fe18ec4dc_f11-d1.log",
+        "line": 11
+      },
+      "request": {
+        "query": "PostgreSQL full-text search indexed backend",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "backend",
+          "skill": "database",
+          "confidence": 0.53,
+          "reasons": [
+            {
+              "type": "title",
+              "value": "Backend Database Skill"
+            },
+            {
+              "type": "description",
+              "value": "postgresql, postgre, sql"
+            },
+            {
+              "type": "heading",
+              "value": "backend"
+            },
+            {
+              "type": "fulltext",
+              "value": "sql"
+            },
+            {
+              "type": "domain",
+              "value": "backend"
+            }
+          ],
+          "alternatives": []
+        },
+        "results": [
+          {
+            "path": "backend/database/SKILL.md",
+            "score": 16.896
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261101_030001_920045a5c41642ec99b9f60fe18ec4dc_f11-d1.log",
+        "line": 14
+      },
+      "request": {
+        "query": "contracts and validation schema compatibility shared principles",
+        "limit": 3,
+        "paths": ["backend/database/SKILL.md"]
+      },
+      "replay": {
+        "route": {
+          "domain": "common",
+          "skill": "engineering",
+          "confidence": 0.467,
+          "reasons": [
+            {
+              "type": "description",
+              "value": "contracts, contract"
+            },
+            {
+              "type": "fulltext",
+              "value": "contracts, contract, validation, compatibility, shared, principles, principle"
+            },
+            {
+              "type": "topic",
+              "value": "compatibility (reference metadata)"
+            },
+            {
+              "type": "topic",
+              "value": "contracts (reference metadata)"
+            },
+            {
+              "type": "topic",
+              "value": "runtime validation (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Contracts and Validation (reference metadata)"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "frontend",
+              "skill": "hook",
+              "confidence": 0.193
+            },
+            {
+              "domain": "frontend",
+              "skill": "i18n",
+              "confidence": 0.192
+            },
+            {
+              "domain": "backend",
+              "skill": "security",
+              "confidence": 0.189
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "common/engineering/SKILL.md",
+            "score": 17.27
+          },
+          {
+            "path": "common/engineering/references/contracts-and-validation.md",
+            "section": "Contracts and Validation > Rules > Mandatory: runtime contracts and compatibility",
+            "score": 30.403
+          },
+          {
+            "path": "common/engineering/references/contracts-and-validation.md",
+            "section": "Contracts and Validation > Example: validate after decoding",
+            "score": 28.682
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261101_030001_920045a5c41642ec99b9f60fe18ec4dc_f11-d1.log",
+        "line": 147
+      },
+      "request": {
+        "query": "postgresql search indexing trigram migration constraint",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "backend",
+          "skill": "database",
+          "confidence": 0.541,
+          "reasons": [
+            {
+              "type": "description",
+              "value": "postgresql, migration"
+            },
+            {
+              "type": "fulltext",
+              "value": "indexing, migration, constraint"
+            },
+            {
+              "type": "topic",
+              "value": "indexing (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Indexing (reference metadata)"
+            }
+          ],
+          "alternatives": []
+        },
+        "results": [
+          {
+            "path": "backend/database/SKILL.md",
+            "score": 17.653
+          },
+          {
+            "path": "backend/database/references/indexing.md",
+            "section": "Indexing > Anti-patterns",
+            "score": 22.901
+          },
+          {
+            "path": "backend/database/references/migrations.md",
+            "section": "Migrations > Rules",
+            "score": 8.961
+          },
+          {
+            "path": "backend/database/references/migrations.md",
+            "section": "Migrations > Notes",
+            "score": 8.951
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261002_080340_f10-d4.log",
+        "line": 127
+      },
+      "request": {
+        "query": "accessibility requirements new page ARIA jest-axe",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "accessibility",
+          "confidence": 0.786,
+          "reasons": [
+            {
+              "type": "keyword",
+              "value": "axe"
+            },
+            {
+              "type": "title",
+              "value": "accessibility"
+            },
+            {
+              "type": "description",
+              "value": "accessibility, aria"
+            },
+            {
+              "type": "heading",
+              "value": "accessibility"
+            },
+            {
+              "type": "fulltext",
+              "value": "accessibility, requirements, requirement, page, aria, jest, axe"
+            },
+            {
+              "type": "topic",
+              "value": "accessibility (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Form Accessibility (reference metadata)"
+            }
+          ],
+          "alternatives": []
+        },
+        "results": [
+          {
+            "path": "frontend/accessibility/SKILL.md",
+            "score": 55.166
+          },
+          {
+            "path": "frontend/accessibility/references/testing.md",
+            "section": "Testing Accessibility > Examples > Good example",
+            "score": 26.196
+          },
+          {
+            "path": "frontend/accessibility/references/aria-patterns.md",
+            "section": "ARIA Patterns > Examples > Bad example",
+            "score": 23.524
+          },
+          {
+            "path": "frontend/accessibility/references/forms.md",
+            "section": "Form Accessibility > Rules",
+            "score": 22.11
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "20261002_080340_f10-d4.log",
+        "line": 128
+      },
+      "request": {
+        "query": "frontend component testing standards react query feature pages",
+        "limit": 5
+      },
+      "replay": {
+        "route": {
+          "domain": "frontend",
+          "skill": "react-query",
+          "confidence": 0.478,
+          "reasons": [
+            {
+              "type": "title",
+              "value": "react-query"
+            },
+            {
+              "type": "description",
+              "value": "react, query"
+            },
+            {
+              "type": "heading",
+              "value": "react, query"
+            },
+            {
+              "type": "fulltext",
+              "value": "react, query, page"
+            },
+            {
+              "type": "topic",
+              "value": "react-query (reference metadata)"
+            },
+            {
+              "type": "topic",
+              "value": "query options (reference metadata)"
+            },
+            {
+              "type": "title",
+              "value": "Query Options (reference metadata)"
+            },
+            {
+              "type": "domain",
+              "value": "frontend"
+            }
+          ],
+          "alternatives": [
+            {
+              "domain": "frontend",
+              "skill": "testing",
+              "confidence": 0.473
+            },
+            {
+              "domain": "backend",
+              "skill": "testing",
+              "confidence": 0.416
+            },
+            {
+              "domain": "frontend",
+              "skill": "i18n",
+              "confidence": 0.397
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "frontend/react-query/SKILL.md",
+            "score": 40.52
+          },
+          {
+            "path": "frontend/react-query/references/query-options.md",
+            "section": "Query Options > Examples > Bad example",
+            "score": 21.32
+          },
+          {
+            "path": "frontend/react-query/references/advanced-patterns.md",
+            "section": "Advanced React Query Patterns > Anti-patterns",
+            "score": 21.1
+          },
+          {
+            "path": "frontend/react-query/references/custom-hooks.md",
+            "section": "Custom Hooks Pattern > Notes > Testing with React Query",
+            "score": 20.967
+          }
+        ]
+      }
+    }
+  ]
+}
